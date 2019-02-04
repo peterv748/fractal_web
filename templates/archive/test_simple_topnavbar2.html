@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fractal picture of the day</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+    body { font-family: Arial, Helvetica, sans-serif; 
+           background: white;
+           color: black;
+         }
+
+      h2 {color: black;}
+      
+      ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: #333;
+         }
+
+      li {
+          float: left;
+         }
+
+      li a, .dropbtn {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            }
+      li a:hover, .dropdown:hover .dropbtn{
+                                           background-color: white;
+                                           color:black;
+                                           }
+
+      li.dropdown { display: inline-block}
+
+      .dropdown-content {
+                          display: none;
+                          position: absolute;
+                          background-color: grey;
+                          min-width: 100%
+                          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
+                          z-index:1;
+                          text-decoration: none;
+                         }
+      .dropdown-content a {
+                           color: white;
+                           padding: 12px 16px;
+                           text-decoration: none;
+                           display: block;
+                           text-align: center;
+                           }
+      .dropdown-content a:hover {
+                                 background-color: grey;
+                                 color: black;
+                                }
+      .dropdown:hover .dropdown-content { display: block;}
+ 
+    </style>
+  </head>
+  <body>
+  <ul>
+  <div class="topnav">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#about">About</a></li>
+    <li class="dropdown">
+    <li style="float:right"><a class="dropbtn" href="#">Menu</a></li>
+    <div class="dropdown-content">
+       <a href="#link1">Link1</a>
+       <a href="#link2">Link3</a>
+       <a href="#link3">Link3</a>
+    </div>
+    </li>
+   </div>
+  </ul>
+  <div style="padding-left:16px"}>
+    <h2>Top Navigation example</h2>
+    <p>Some dropdown menu.....</p>
+  </div>
+  </body>
+</html>

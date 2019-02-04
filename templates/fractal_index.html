@@ -1,0 +1,102 @@
+{% extends "template.html" %}
+{% block content %}
+   <h2>Gallery of fractal images</h2>
+
+   <style>
+     div.table_image {
+        max-width:600px;
+	    max-height:500px;
+	    margin: auto;
+	    overflow:auto;
+	    box-sizing: border-box;
+        }
+      
+     div.gallery_item {
+        max-width:180px;
+	max-heigth:150px;
+	margin: auto;
+	box-sizing: border-box;
+        }
+
+     div.gallery_item:hover {
+        border: 1px solid #777;
+        }
+
+    div.gallery_item img {
+       width: 100%;
+       height: 100%;
+       opacity: 0.5
+       }
+
+    div.gallery_item img:hover {
+       opacity: 1.0
+       }
+
+    div.desc {
+       box-sizing: border-box;
+       text-align: center;
+       }
+   </style>
+
+   <div class="table_image">
+   <table border="0" align="center" width="100%">
+     <tr>
+       <td>
+	 <div class="gallery_item">
+           <a href="/mandel1">
+             <img src="{{url_for('static', filename='mandel1_thumb.png')}}" alt="Mandelbrot1 set">
+           </a>
+           <div class="desc"><small>Mandelbrot set, straightforward computation</small></div>
+         </div>
+       </td>
+       <td>
+         <div class="gallery_item">
+           <a href="/mandel2">
+             <img src="{{url_for('static', filename='mandel2_thumb.png')}}" alt="Mandelbrot2 set">
+           </a>
+           <div class="desc"><small>Mandelbrot set, Numba JIT compiler</small></div>
+        </div>
+       </td>
+       <td>
+         <div class="gallery_item">
+           <a href="/mandel3">
+           <img src="{{url_for('static', filename='mandel3_thumb.png')}}" alt="Mandelbrot3 set">
+           </a>
+         <div class="desc"><small>Mandelbrot set, Cuda 10.0 computation</small></div>
+         </div>
+      </td>
+     </tr>
+
+     <tr>
+       <td>
+         <div class="gallery_item">
+           <a href="/julia1">
+           <img src="{{url_for('static', filename='julia1_thumb.png')}}" alt="Julia1 thumb">
+           </a>
+         <div class="desc"><small>Julia set, straightforward computation</small></div>
+        </div>
+       </td>
+       <td>
+         <div class="gallery_item">
+           <a href="/julia2">
+           <img src="{{url_for('static', filename='julia2_thumb.png')}}" alt="Julia2 set">
+           </a>
+           <div class="desc"><small>Julia set, using Numba JIT compiler</small></div>
+        </div>
+       </td>
+       <td>       
+         <div class="gallery_item">
+           <a href="/julia3">
+           <img src="{{url_for('static', filename='julia3_thumb.png')}}" alt="Julia3 set">
+           </a>
+           <div class="desc"><small>Julia set, Cuda 10.0 computation</small></div>
+         </div>
+       </td>
+     </tr>
+   </table>
+   </div>  
+      
+   <p><a><small>Courtesy: peterv748</small></a></p>
+   <p><a><small>Number of visitors: "{{visits}}"</small></a></p>
+   <p><a><small>Hostname: "{{hostname}}"</small></a></p>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "template.html" %}
+{% block content %}
+ 
+   <style>
+
+       div.image {
+           max-width: 600px;
+           max-heigth: 500px;
+           margin: auto;
+           box-sizing: border-box;
+       }
+
+    div.image img {
+	width: 50%;
+	height: 50%;
+    }
+   </style>   
+
+
+   <h2>Homepage of Peterv748</h2>
+   
+   <div class="image">
+           <img src="https://maps.googleapis.com/maps/api/staticmap?center=Aalsmeer,Netherlands&size=300x300&zoom=13&key=AIzaSyDWU-FFeJRylxfOtCSjMsEr6cUOOX19RLk">
+           <img src="https://maps.googleapis.com/maps/api/streetview?location=Aalsmeer,Netherlands&size=300x300&heading=180&key=AIzaSyDWU-FFeJRylxfOtCSjMsEr6cUOOX19RLk">
+   </div>
+    
+   
+   <p><a><small>Courtesy: peterv748</small></a></p>
+   <p><a><small>Number of visitors: "{{visits}}"</small></a></p>
+   <p><a><small>Hostname: "{{hostname}}"</small></a></p>
+{% endblock %}

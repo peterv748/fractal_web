@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "test_web_advanced", "test_web_advanced.pyproj", "{30D2C2E1-5B5D-424E-B346-84E12BD75322}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30D2C2E1-5B5D-424E-B346-84E12BD75322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30D2C2E1-5B5D-424E-B346-84E12BD75322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80164D76-CE94-42E0-A891-8D8B16EEF878}
+	EndGlobalSection
+EndGlobal

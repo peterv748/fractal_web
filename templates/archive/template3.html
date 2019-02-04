@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fractal picture of the day</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      .container {
+        max-width: 500px;
+        padding-top: 100px;
+      }
+      h2 {color: red;}
+      body {
+        background: black;
+        color: white;
+      }
+      div.container {
+        max-width: 1000px;
+        margin: 100px auto;
+        border: 5px solid white;
+        padding: 10px;
+        text-align: center;
+      }
+      h4 {text-transform: uppercase;} 
+    </style>
+    
+  </head>
+  <body>
+  <section class="navigation">
+    <div class="nav-container">
+      <div class="brand">
+	<a href="#Logo">Logo</a>
+      </div>
+      <nav>
+        <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+        <ul class="nav-list">
+           <li><a href="#home">Home</a></li>
+           <li><a href="#News">News</a></li>
+           <li><a href="#Contact">Contact</a></li>
+           <li><a href="#About">About</a></li>
+           <li><a href="#pvbv">Dropdown</a>
+              <ul class="nav-dropdown">
+              <li><a href="#Link1">Link 1</a>
+              <li><a href="#Link2">Link 2</a>
+              <li><a href="#Link2">Link 3</a>
+           </li>
+         </ul>
+       </nav>
+      </div>
+    </section>
+  
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+  </body>
+</html>
