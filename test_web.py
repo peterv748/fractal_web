@@ -67,6 +67,15 @@ def show_news():
 
     return render_template("news.html", hostname=socket.gethostname(), visits=visits)
 
+@app.route('/about')
+def show_about():
+    try:
+        visits = redis.incr("counter")
+    except RedisError:
+        visits = "<i>cannot connect to Redis, counter disabled</i>"
+
+    return render_template("about.html", hostname=socket.gethostname(), visits=visits)
+
 @app.route('/link1')
 def show_link1():
     try:

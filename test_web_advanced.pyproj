@@ -60,7 +60,7 @@
     <Content Include="templates\link1.html" />
     <Content Include="templates\link2.html" />
     <Content Include="templates\link3.html" />
-    <Content Include="templates\news.html" />
+    <Content Include="templates\about.html" />
     <Content Include="templates\template.html" />
   </ItemGroup>
   <ItemGroup>
