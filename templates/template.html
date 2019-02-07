@@ -37,6 +37,7 @@
           padding: 0;
           overflow: hidden;
           background-color: #333;
+          font-size: 14px;
          }
 
       li {
@@ -140,7 +141,7 @@
   /*Make all menu links full width*/
       ul li, li a {
           width: 100%;
-          padding: 4px 4px;
+          padding: 4px 0;
           text-align: center;
           }
   /* Mak dropdown full width*/
@@ -164,7 +165,7 @@
   /* Links inside the dropdown */
       .dropdown-content a {
             color: white;
-            padding: 2px 2px;
+            padding: 4px 4px;
             text-decoration: none;
             display: block;
             text-align: center;
@@ -186,11 +187,12 @@
 
       <ul id="menu">
           <li><a href="home"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="news"> News</a></li>
+          <li><a href="news"><i class="fas fa-newspaper"></i> News</a></li>
           <li><a href="fractals"><i class="fas fa-images"></i> Fractals</a></li>
           <li><a href="about"><i class="fas fa-user"></i> About</a></li>
+          <li><a href="contact"><i class="far fa-envelope"></i> Contact</a></li>
           <li class="dropdown" >
-              <a class="dropbtn" href="#">Menu</a>
+              <a class="dropbtn" href="#"><i class="fas fa-bars"></i> Menu</a>
               <div class="dropdown-content">
                   <a href="link1">Link 1</a>
                   <a href="link2">Link 2</a>
