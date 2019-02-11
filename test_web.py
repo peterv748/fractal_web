@@ -85,18 +85,17 @@ def show_contact():
 
     return render_template("contact.html", hostname=socket.gethostname(), visits=visits)
 
-@app.route('/web_hook')
+@app.route('/web_hook', methods=['GET','POST'])
 def show_web_hoook():
     try:
         visits = redis.incr("counter")
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
-    valid_webhook=True
     date_time= datetime.datetime.now()
-    if valid_webhook:
+    if request.method=='POST':
         message= "docker stack deploy -c docker-compose.yml fractal has been executed"
     else:
-        message= "wrong webhook received"
+        message= "no updates sofar"
 
     return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message=message, date_time=date_time)
 
