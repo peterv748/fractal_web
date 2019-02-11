@@ -93,11 +93,11 @@ def show_web_hoook():
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     date_time= datetime.datetime.now()
     if request.method=='POST':
-        message= "docker stack deploy -c docker-compose.yml fractal has been executed"
+        message_post= "last redeploy: "+ date_time + " docker stack deploy -c docker-compose.yml fractal has been executed"
     else:
-        message= "no updates sofar"
+        message_get= "no updates sofar"
 
-    return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message=message, date_time=date_time)
+    return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=message_post, message_get=message_get)
 
 @app.route('/link2')
 def show_link2():
