@@ -57,7 +57,7 @@
     <Content Include="templates\fractals.html" />
     <Content Include="templates\fractal_index.html" />
     <Content Include="templates\home.html" />
-    <Content Include="templates\link1.html" />
+    <Content Include="templates\web_hook.html" />
     <Content Include="templates\link2.html" />
     <Content Include="templates\link3.html" />
     <Content Include="templates\about.html" />

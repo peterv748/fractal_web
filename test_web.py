@@ -4,7 +4,7 @@ import os
 import random
 from redis import Redis, RedisError
 import socket
-
+import datetime
 
 
 app = Flask(__name__)
@@ -85,14 +85,20 @@ def show_contact():
 
     return render_template("contact.html", hostname=socket.gethostname(), visits=visits)
 
-@app.route('/link1')
-def show_link1():
+@app.route('/web_hook')
+def show_web_hoook():
     try:
         visits = redis.incr("counter")
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
+    valid_webhook=True
+    date_time= datetime.datetime.now()
+    if valid_webhook:
+        message= "docker stack deploy -c docker-compose.yml fractal has been executed"
+    else:
+        message= "wrong webhook received"
 
-    return render_template("link1.html", hostname=socket.gethostname(), visits=visits)
+    return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message=message, date_time=date_time)
 
 @app.route('/link2')
 def show_link2():
