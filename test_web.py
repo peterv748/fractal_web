@@ -92,6 +92,9 @@ def show_web_hoook():
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     date_time= datetime.datetime.now()
+    message_post = " "
+    message_get = " "
+
     if request.method=='POST':
         message_post= "last redeploy: "+ date_time + " docker stack deploy -c docker-compose.yml fractal has been executed"
     else:
