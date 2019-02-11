@@ -96,11 +96,11 @@ def show_web_hoook():
     message_get = " "
 
     if request.method=='POST':
-        message_post= "last redeploy: "+ date_time + " docker stack deploy -c docker-compose.yml fractal has been executed"
+        message_post= "last redeploy: "+ " docker stack deploy -c docker-compose.yml fractal has been executed"
     else:
         message_get= "no updates sofar"
 
-    return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=message_post, message_get=message_get)
+    return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=message_post, message_get=message_get, date_time=date_time)
 
 @app.route('/link2')
 def show_link2():
