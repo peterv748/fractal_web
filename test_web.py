@@ -12,21 +12,11 @@ app = Flask(__name__)
 # app.config['THUMBNAIL_MEDIA_ROOT'] = './'
 # app.config['THUMBNAIL_MEDIA_URL'] = './media'
 # app.config['THUMBNAIL_DEFAUL_FORMAT'] = 'PNG'
+
 redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
 
 
-images = [
-    "mandel1.png",
-    "mandel2.png",
-    "mandel3.png",
-    "julia1.png",
-    "julia2.png",
-    "julia3.png",
-    "koch1.png",
-    "koch2.png",
-    ]
 
-image_path = " "
 message_post_count = 0
 
 @app.route('/')
@@ -53,7 +43,8 @@ def show_fractal_picture(imagename):
         visits = redis.incr("counter")
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
-   
+
+    image_path = " "
     image_path = imagename + ".png"
     full_filename = url_for('static', filename=image_path)
 
@@ -88,6 +79,8 @@ def show_contact():
 
 @app.route('/web_hook', methods=['GET','POST'])
 def show_web_hook():
+    global message_post_count
+    
     try:
         visits = redis.incr("counter")
     except RedisError:
