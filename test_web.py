@@ -27,6 +27,7 @@ images = [
     ]
 
 image_path = " "
+message_post_count = 0
 
 @app.route('/')
 @app.route('/home')
@@ -92,7 +93,10 @@ def show_web_hoook():
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     date_time= datetime.datetime.now()
-    message_post = " "
+    if message_post_count == 0:
+        message_post = " "
+        messafe_post_count = message_post_count + 1
+
     message_get = " "
 
     if request.method=='POST':
