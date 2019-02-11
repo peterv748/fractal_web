@@ -87,7 +87,7 @@ def show_contact():
     return render_template("contact.html", hostname=socket.gethostname(), visits=visits)
 
 @app.route('/web_hook', methods=['GET','POST'])
-def show_web_hoook():
+def show_web_hook():
     try:
         visits = redis.incr("counter")
     except RedisError:
@@ -95,12 +95,12 @@ def show_web_hoook():
     date_time= datetime.datetime.now()
     if message_post_count == 0:
         message_post = " "
-        messafe_post_count = message_post_count + 1
+        message_post_count = message_post_count + 1
 
     message_get = " "
 
     if request.method=='POST':
-        message_post= "last redeploy: "+ " docker stack deploy -c docker-compose.yml fractal has been executed"
+        message_post= "last redeploy: " + " docker stack deploy -c docker-compose.yml fractal has been executed"
     else:
         message_get= "no updates sofar"
 
