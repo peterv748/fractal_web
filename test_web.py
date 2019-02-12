@@ -8,11 +8,6 @@ import datetime
 
 
 app = Flask(__name__)
-# thumb = Thumbnail(app)
-# app.config['THUMBNAIL_MEDIA_ROOT'] = './'
-# app.config['THUMBNAIL_MEDIA_URL'] = './media'
-# app.config['THUMBNAIL_DEFAUL_FORMAT'] = 'PNG'
-
 
 message_get = " "
 message_post = " "
