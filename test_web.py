@@ -12,10 +12,8 @@ app = Flask(__name__)
 
 
 try:
-    redis = Redis(host= "redis", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
+    redis = Redis(host= "127.0.0.1", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
     redis.set("counter", 0)
-    redis.set("laststackdeploy", message_post)
-    redis.set("datetimelaststackdeploy", date_time)
 except RedisError:
     message_get = " "
 
@@ -79,8 +77,8 @@ def show_contact():
 
 @app.route('/web_hook', methods=['GET','POST'])
 def show_web_hook():
-    message_post = " "
-    message_get = " "
+    message_post = ""
+    message_get = ""
     date_time = None
     date_time_now = None
     
