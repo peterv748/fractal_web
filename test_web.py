@@ -94,11 +94,14 @@ def show_web_hook():
                  message_post= "last redeploy: " + " docker stack deploy -c docker-compose.yml fractal has been executed"
                  redis.set("laststackdeploy", message_post)
                  redis.set("datetimelaststackdeploy", date_time)
-                 message_post = redis.get("laststackdeploy")
-                 date_time = redis.get("datetimelaststackdeploy")
+                
             if request.method=='GET':
                 message_get= "no updates sofar"
-                date_time_now= datetime.datetime.now()  
+                date_time_now= datetime.datetime.now() 
+
+            date_time_now = datetime.datetime.now()    
+            message_post = redis.get("laststackdeploy")
+            date_time = redis.get("datetimelaststackdeploy")
     except RedisError:
             visits = "<i>cannot connect to Redis, counter disabled</i>"  
             if request.method=='POST':
