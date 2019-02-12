@@ -9,9 +9,7 @@ import datetime
 
 app = Flask(__name__)
 
-message_get = " "
-message_post = " "
-date_time = None
+
 
 try:
     redis = Redis(host= "redis", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
@@ -81,23 +79,22 @@ def show_contact():
 
 @app.route('/web_hook', methods=['GET','POST'])
 def show_web_hook():
-    global message_post
-    global message_get
-    global date_time
-
+    message_post = " "
+    message_get = " "
+    date_time = None
     date_time_now = None
     
     try:
             visits = redis.incr("counter")
             if request.method=='POST':
                  date_time= datetime.datetime.now()
-                 message_post= "last redeploy: " + " docker stack deploy -c docker-compose.yml fractal has been executed"
+                 message_post= "update: docker stack deploy -c docker-compose.yml fractal has been executed"
                  redis.set("laststackdeploy", message_post)
                  redis.set("datetimelaststackdeploy", date_time)
                 
             if request.method=='GET':
                 message_get= "no updates sofar"
-                date_time_now= datetime.datetime.now() 
+                date_time_now= datetime.datetime.now()
 
             date_time_now = datetime.datetime.now()    
             message_post = redis.get("laststackdeploy")
