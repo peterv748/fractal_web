@@ -14,6 +14,8 @@ app = Flask(__name__)
 try:
     redis = Redis(host= "redis", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
     redis.set("counter", 0)
+    redis.set("laststackdeploy", "")
+    redis.set("datetimelaststackdeploy", None)
 except RedisError:
     message_get = " "
 
