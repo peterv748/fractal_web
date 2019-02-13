@@ -1,8 +1,13 @@
 {% extends "template.html" %}
 {% block content %}
    <h2>News of the day</h2>
-   <img src="https://www.nu.nl/" />
-   <p><a><small>Courtesy: peterv748</small></a></p>
+
+   <iframe width="400"
+           height="400"
+           frameborder="0" style="border:0"
+           src="https://newsapi.org/v2/everything?sources=rtl-nieuws&apiKey=1f8755052a0040efa1210d8df55ca6df">
+   </iframe>
+   <p><a><small>Courtesy: peterv748 and NEWSAPI.ORG</small></a></p>
    <p><a><small>Number of visitors: "{{visits}}"</small></a></p>
    <p><a><small>Hostname: "{{hostname}}"</small></a></p>
 {% endblock %}

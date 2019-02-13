@@ -5,7 +5,7 @@ import random
 from redis import Redis, RedisError
 import socket
 from datetime import datetime
-
+from newsapi import NewsApiClient
 
 app = Flask(__name__)
 temp = None
@@ -57,7 +57,27 @@ def show_news():
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
 
-    return render_template("news.html", hostname=socket.gethostname(), visits=visits)
+    newsapi = NewsApiClient(api_key='1f8755052a0040efa1210d8df55ca6df')
+
+    top_headlines = newsapi.get_top_headlines(q='wiskunde',
+                                          sources='rtl-nieuws',
+                                          category='wetenschap',
+                                          language='nl',
+                                          country='nl')
+    # checks inbouwen !!!!
+    all_articles = newsapi.get_everything(q='bitcoin',
+                                      sources='rtl-nieuws',
+                                      domains='bbc.co.uk,techcrunch.com',
+                                      from_param='2018-01-01',
+                                      to='2019-02-12',
+                                      language='nl',
+                                      sort_by='relevancy',
+                                      page=2)
+    # checks inbouwen !!!!
+
+    sources = newsapi.get_sources()
+    # checks inbouwen
+    return render_template("news.html", hostname=socket.gethostname(), visits=visits) 
 
 @app.route('/about')
 def show_about():
