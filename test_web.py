@@ -4,20 +4,20 @@ import os
 import random
 from redis import Redis, RedisError
 import socket
-import datetime
+from datetime import datetime
 
 
 app = Flask(__name__)
-
+temp = None
 
 
 try:
     redis = Redis(host= "redis", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
     redis.set("counter", 0)
-    redis.set("laststackdeploy", "")
+    redis.set("laststackdeploy", None)
     redis.set("datetimelaststackdeploy", None)
 except RedisError:
-    message_get = " "
+    temp = None
 
 @app.route('/')
 @app.route('/home')
@@ -79,36 +79,41 @@ def show_contact():
 
 @app.route('/web_hook', methods=['GET','POST'])
 def show_web_hook():
-    message_post = ""
-    message_get = ""
+    message_post = None
+    message_get = None
     date_time = None
     date_time_now = None
+    date_time_str = ""
+    date_time_now_str=""
     
     try:
             visits = redis.incr("counter")
             if request.method=='POST':
-                 date_time= datetime.datetime.now()
+                 date_time= datetime.now()
+                 date_time_str = f'{date_time:%d-%m-%Y %H:%M:%S}'
                  message_post= "update: docker stack deploy -c docker-compose.yml fractal has been executed"
                  redis.set("laststackdeploy", message_post)
-                 redis.set("datetimelaststackdeploy", date_time)
+                 redis.set("datetimelaststackdeploy", date_time_str)
                 
             if request.method=='GET':
                 message_get= "no updates sofar"
-                date_time_now= datetime.datetime.now()
+                date_time_now = datetime.now() 
+                date_time_now_str = f'{date_time_now:%d-%m-%Y %H:%M:%S}'
 
-            date_time_now = datetime.datetime.now()    
             message_post = redis.get("laststackdeploy")
-            date_time = redis.get("datetimelaststackdeploy")
+            date_time_str = redis.get("datetimelaststackdeploy")
     except RedisError:
             visits = "<i>cannot connect to Redis, counter disabled</i>"  
             if request.method=='POST':
-                 date_time= datetime.datetime.now()
-                 message_post= "last redeploy: " + " docker stack deploy -c docker-compose.yml fractal has been executed"
+                 date_time= datetime.now()
+                 date_time_str = f'{date_time:%d-%m-%Y %H:%M:%S}'
+                 message_post= "last redeploy: docker stack deploy -c docker-compose.yml fractal has been executed"
             else:
                  message_get= "no updates sofar"
-                 date_time_now= datetime.datetime.now() 
-   
-    return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=message_post, message_get=message_get, date_time=date_time, date_time_now=date_time_now)
+                 date_time_now= datetime.now()    
+                 date_time_now_str = f'{date_time_now:%d-%m-%Y %H:%M:%S}'
+
+    return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=message_post, message_get=message_get, date_time=date_time_str, date_time_now=date_time_now_str)
 
 @app.route('/link2')
 def show_link2():
