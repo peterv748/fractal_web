@@ -6,13 +6,18 @@ from redis import Redis, RedisError
 import socket
 from datetime import datetime
 from newsapi import NewsApiClient
+from ipdata import ipdata
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 app = Flask(__name__)
 temp = None
 
 
 try:
-    redis = Redis(host= "redis", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
+    redis = Redis(host= "127.0.0.1", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
     redis.set("counter", 0)
     redis.set("laststackdeploy", None)
     redis.set("datetimelaststackdeploy", None)
@@ -56,28 +61,23 @@ def show_news():
         visits = redis.incr("counter")
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
-
-    newsapi = NewsApiClient(api_key='1f8755052a0040efa1210d8df55ca6df')
-
-    top_headlines = newsapi.get_top_headlines(q='wiskunde',
+   
+    Api_Key = '1f8755052a0040efa1210d8df55ca6df'
+    newsapi = NewsApiClient(api_key=Api_Key)
+    top_headlines = newsapi.get_top_headlines(
                                           sources='rtl-nieuws',
-                                          category='wetenschap',
                                           language='nl',
-                                          country='nl')
+                                          )
     # checks inbouwen !!!!
-    all_articles = newsapi.get_everything(q='bitcoin',
-                                      sources='rtl-nieuws',
-                                      domains='bbc.co.uk,techcrunch.com',
-                                      from_param='2018-01-01',
-                                      to='2019-02-12',
-                                      language='nl',
+    all_articles = newsapi.get_everything(q='mathematics',
+                                      from_param='2019-01-18',
+                                      to='2019-02-18',
                                       sort_by='relevancy',
                                       page=2)
     # checks inbouwen !!!!
 
-    sources = newsapi.get_sources()
     # checks inbouwen
-    return render_template("news.html", hostname=socket.gethostname(), visits=visits) 
+    return render_template("news.html", hostname=socket.gethostname(), visits=visits, api_key=Api_Key) 
 
 @app.route('/about')
 def show_about():
