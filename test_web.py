@@ -36,7 +36,7 @@ def show_home():
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
 
-    return render_template("home.html", hostname=socket.gethostname(), visits=visits, api_key=Google_Api_Key)
+    return render_template("home.html", hostname=socket.gethostname(), visits=visits, api_key=Google_Api_Key, owm_key=Weather_Api_Key)
 
 @app.route('/fractals')
 def show_fractal_index():
