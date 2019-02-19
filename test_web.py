@@ -11,6 +11,10 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
+News_Api_Key = os.environ["NEWSORG_API_KEY"]
+Weather_Api_Key = os.environ["OMW_API_KEY"]
+IP_Api_Key = os.environ["IPDATA_API_KEY"]
+Google_Api_Key = os.environ["GOOGLE_MAPS_API_KEY"]
 
 app = Flask(__name__)
 temp = None
@@ -32,7 +36,7 @@ def show_home():
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
 
-    return render_template("home.html", hostname=socket.gethostname(), visits=visits)
+    return render_template("home.html", hostname=socket.gethostname(), visits=visits, api_key=Google_Api_Key)
 
 @app.route('/fractals')
 def show_fractal_index():
@@ -62,22 +66,21 @@ def show_news():
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
    
-    Api_Key = '1f8755052a0040efa1210d8df55ca6df'
-    newsapi = NewsApiClient(api_key=Api_Key)
+    newsapi = NewsApiClient(api_key=News_Api_Key)
     top_headlines = newsapi.get_top_headlines(
                                           sources='rtl-nieuws',
                                           language='nl',
                                           )
     # checks inbouwen !!!!
     all_articles = newsapi.get_everything(q='mathematics',
-                                      from_param='2019-01-18',
+                                      from_param='2019-02-01',
                                       to='2019-02-18',
                                       sort_by='relevancy',
                                       page=2)
     # checks inbouwen !!!!
 
     # checks inbouwen
-    return render_template("news.html", hostname=socket.gethostname(), visits=visits, api_key=Api_Key) 
+    return render_template("news.html", hostname=socket.gethostname(), visits=visits, api_key=News_Api_Key) 
 
 @app.route('/about')
 def show_about():
