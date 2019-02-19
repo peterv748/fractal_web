@@ -13,8 +13,11 @@ services:
           memory: 50M
     ports:
       - "4000:80"
-    networks
+    networks:
       - webnet
+	env_file:
+	  - setenv.env
+
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
@@ -26,6 +29,7 @@ services:
         constraints: [node.role == manager]
     networks:
       - webnet
+
   redis:
     image: redis
     ports:

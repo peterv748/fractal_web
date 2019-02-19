@@ -21,7 +21,7 @@ temp = None
 
 
 try:
-    redis = Redis(host= "127.0.0.1", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
+    redis = Redis(host= "redis", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
     redis.set("counter", 0)
     redis.set("laststackdeploy", None)
     redis.set("datetimelaststackdeploy", None)
