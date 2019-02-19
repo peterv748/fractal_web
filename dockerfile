@@ -12,7 +12,7 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 RUN pip install newsapi-python
 
-RUN pip install idata
+RUN pip install ipdata
 
 RUN pip install -U python-dotenv
 
