@@ -2,17 +2,14 @@
 {% block content %}
    <h2>News of the day</h2>
 
-   <iframe width="300"
-           height="300"
-           frameborder="0" style="border:0"
-           src="https://newsapi.org/v2/top-headlines?sources=rtl-nieuws&apiKey={{api_key}}">
-   </iframe>
-
+   <h3><p> Headlines</p></h3>
+   <p>{{line1}}</p>
+   <p><small><a href={{url}}>{{url}}</a></small></p>
    <iframe width="300"
            height="300"
            frameborder="0" style="border:0"
            src="https://newsapi.org/v2/everything?q=mathematics&from=2019-02-01&apiKey={{api_key}}"></iframe>
-   <p><a><small>Courtesy: peterv748 and NEWSAPI.ORG</small></a></p>
+   <p><a><small>Courtesy: peterv748 and NEWSAPI.ORG and RTL Nieuws</small></a></p>
    <p><a><small>Number of visitors: "{{visits}}"</small></a></p>
    <p><a><small>Hostname: "{{hostname}}"</small></a></p>
 {% endblock %}

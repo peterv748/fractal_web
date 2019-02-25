@@ -20,7 +20,7 @@ weather_url = "https://api.openweathermap.org/data/2.5/weather?q=Aalsmeer,nl&app
 
 app = Flask(__name__)
 temp = None
-redis = None
+redis = Redis(host="127.0.0.1", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
 
 try:
     if REDIS_HOST == "127.0.0.1":
@@ -46,6 +46,8 @@ def show_home():
     main_description = ""
     main_temp = {}
     temp = ""
+    city = ""
+    message = ""
     url_data = req.get(weather_url)
 
     json_data_dict = dict(url_data.json())
@@ -54,14 +56,16 @@ def show_home():
        if json_data_dict['cod'] == 200:
           main_forecast = dict(json_data_dict['weather'][0] )
           main_description = main_forecast['description']
+          city = json_data_dict['name']
           main_temp = dict(json_data_dict['main'])
-          temp = str(int(main_temp['temp']- Kelvin)) + "℃"       
+          temp = str(int(main_temp['temp']- Kelvin)) + " ℃"
+          message = "Current weather in " + city + " " + main_description + " " + temp
        else:
          print ("no data received")
     else:
       print ("sorry something went wrong, no connection " + url_data.text)
 
-    return render_template("home.html", hostname=socket.gethostname(), visits=visits, api_key=Google_Api_Key, main_description=main_description, main_temp = temp)
+    return render_template("home.html", hostname=socket.gethostname(), visits=visits, api_key=Google_Api_Key, message = message)
 
 @app.route('/fractals')
 def show_fractal_index():
@@ -91,23 +95,23 @@ def show_news():
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     temp = {}
+    line1=""
+    url=""
+
     url_data = req.get(news_headlines_url)
     json_data_dict = dict(url_data.json())
     if url_data.status_code == 200:
     
-       if json_data_dict["status"] == "ok":
-          number_of_articles = len(json_data_dict["articles"])
-          for key in range(0, number_of_articles):
-              temp = dict(json_data_dict["articles"][key])
-              print (str(key) + ": " + temp["title"])
-              print (temp["description"])
-              print ("read more: "+ temp["url"])
+       if json_data_dict['status'] == 'ok':
+          temp = dict(json_data_dict['articles'][0])
+          line1 =  temp['title']
+          url = " Read more: " + temp['url']
        else:
         print ("no data received")
     else:
       print ("sorry something went wrong " + url_data.text)
     
-    return render_template("news.html", hostname=socket.gethostname(), visits=visits, api_key=News_Api_Key) 
+    return render_template("news.html", hostname=socket.gethostname(), visits=visits, api_key=News_Api_Key, line1=line1, url=url) 
 
 @app.route('/about')
 def show_about():
