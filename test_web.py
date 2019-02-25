@@ -1,27 +1,29 @@
 from flask import Flask, render_template, request, url_for
-# from flask_thumbnails import Thumbnail
 import os
 import random
 from redis import Redis, RedisError
 import socket
 from datetime import datetime
-from newsapi import NewsApiClient
-from ipdata import ipdata
-from dotenv import load_dotenv
+import json
+import requests as req
 
 
-load_dotenv()
+
 News_Api_Key = os.environ["NEWSORG_API_KEY"]
 Weather_Api_Key = os.environ["OMW_API_KEY"]
 IP_Api_Key = os.environ["IPDATA_API_KEY"]
 Google_Api_Key = os.environ["GOOGLE_MAPS_API_KEY"]
+REDIS_HOST = os.environ["REDIS_HOST"]
+news_headlines_url = "https://newsapi.org/v2/top-headlines?sources=rtl-nieuws&apiKey={}".format(News_Api_Key)
+news_topic_url = "https://newsapi.org/v2/everything?q=mathematics&from=2019-02-21&apiKey={}".format(News_Api_Key)
+weather_url = "https://api.openweathermap.org/data/2.5/weather?q=Aalsmeer,nl&appid={}".format(Weather_Api_Key)
 
 app = Flask(__name__)
 temp = None
 
 
 try:
-    redis = Redis(host= "redis", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
+    redis = Redis(host= REDIS_HOST, db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
     redis.set("counter", 0)
     redis.set("laststackdeploy", None)
     redis.set("datetimelaststackdeploy", None)
@@ -35,8 +37,28 @@ def show_home():
         visits = redis.incr("counter")
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
+    Kelvin = 273.15
+    main_forecast = {}
+    main_description = ""
+    main_temp = {}
+    temp = ""
+    url_data = req.get(weather_url)
 
-    return render_template("home.html", hostname=socket.gethostname(), visits=visits, api_key=Google_Api_Key, owm_key=Weather_Api_Key)
+    json_data_dict = dict(url_data.json())
+    if url_data.status_code == 200:
+    
+       if json_data_dict['cod'] == 200:
+          main_forecast = dict(json_data_dict['weather'][0] )
+          main_description = main_forecast['description']
+          main_temp = dict(json_data_dict['main'])
+          temp = str(int(main_temp['temp']- Kelvin))
+           
+       else:
+         print ("no data received")
+    else:
+      print ("sorry something went wrong, no connection " + url_data.text)
+
+    return render_template("home.html", hostname=socket.gethostname(), visits=visits, api_key=Google_Api_Key, main_description=main_description, main_temp = temp)
 
 @app.route('/fractals')
 def show_fractal_index():
@@ -65,21 +87,23 @@ def show_news():
         visits = redis.incr("counter")
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
-   
-    newsapi = NewsApiClient(api_key=News_Api_Key)
-    top_headlines = newsapi.get_top_headlines(
-                                          sources='rtl-nieuws',
-                                          language='nl',
-                                          )
-    # checks inbouwen !!!!
-    all_articles = newsapi.get_everything(q='mathematics',
-                                      from_param='2019-02-01',
-                                      to='2019-02-18',
-                                      sort_by='relevancy',
-                                      page=2)
-    # checks inbouwen !!!!
-
-    # checks inbouwen
+    temp = {}
+    url_data = req.get(news_headline_url)
+    json_data_dict = dict(url_data.json())
+    if url_data.status_code == 200:
+    
+       if json_data_dict["status"] == "ok":
+          number_of_articles = len(json_data_dict["articles"])
+          for key in range(0, number_of_articles):
+              temp = dict(json_data_dict["articles"][key])
+              print (str(key) + ": " + temp["title"])
+              print (temp["description"])
+              print ("read more: "+ temp["url"])
+       else:
+        print ("no data received")
+    else:
+      print ("sorry something went wrong " + url_data.text)
+    
     return render_template("news.html", hostname=socket.gethostname(), visits=visits, api_key=News_Api_Key) 
 
 @app.route('/about')

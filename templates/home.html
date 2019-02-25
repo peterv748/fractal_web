@@ -1,41 +1,38 @@
 {% extends "template.html" %}
 {% block content %}
- 
-   <style>
 
-       div.image {
-           max-width: 600px;
-           max-height: 500px;
-           margin: auto;
-           box-sizing: border-box;
-       }
+<style>
 
-    div.image img {
-	width: 50%;
-	height: 50%;
+    div.image {
+        max-width: 600px;
+        max-height: 500px;
+        margin: auto;
+        box-sizing: border-box;
     }
-   </style>   
+
+        div.image img {
+            width: 50%;
+            height: 50%;
+        }
+</style>
 
 
-   <h2>Homepage of Peterv748</h2>
-   <iframe width="300"
-           height="300"
-           frameborder="0" style="border:0"
-           src="https://www.google.com/maps/embed/v1/place?key={{api_key}}&q=Aalsmeer,Netherlands">
-   </iframe>
-   <iframe width="300"
-           height="300"
-           frameborder="0" style="border:0"
-           src="https://www.google.com/maps/embed/v1/streetview?key={{api_key}}&location=52.2621639,4.7619222&heading=180" >
-   </iframe>
-   <iframe width="300"
-           height="300"
-           frameborder="0" style="border:0"
-           src="https://api.openweathermap.org/data/2.5/forecast?q=Aalsmeer,nl&appid={{owm_key}}">
-   </iframe>
-    
-   
-   <p><a><small>Courtesy: peterv748</small></a></p>
-   <p><a><small>Number of visitors: {{visits}}</small></a></p>
-   <p><a><small>Hostname: {{hostname}}</small></a></p>
+<h2>Homepage of Peterv748</h2>
+<iframe width="300"
+        height="300"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key={{api_key}}&q=Aalsmeer,Netherlands"></iframe>
+<iframe width="300"
+        height="300"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/streetview?key={{api_key}}&location=52.2621639,4.7619222&heading=180"></iframe>
+
+<h3>Current temperature: {{main_temp}}</h3>
+<h3>Description: {{main_description}}</h3> 
+  
+
+
+<p><a><small>Courtesy: peterv748</small></a></p>
+<p><a><small>Number of visitors: {{visits}}</small></a></p>
+<p><a><small>Hostname: {{hostname}}</small></a></p>
 {% endblock %}
