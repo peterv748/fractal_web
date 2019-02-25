@@ -20,10 +20,14 @@ weather_url = "https://api.openweathermap.org/data/2.5/weather?q=Aalsmeer,nl&app
 
 app = Flask(__name__)
 temp = None
-
+redis = None
 
 try:
-    redis = Redis(host= REDIS_HOST, db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
+    if REDIS_HOST == "127.0.0.1":
+       redis = Redis(host="127.0.0.1", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
+    else:
+        if REDIS_HOST == "redis":
+           redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
     redis.set("counter", 0)
     redis.set("laststackdeploy", None)
     redis.set("datetimelaststackdeploy", None)
@@ -51,8 +55,7 @@ def show_home():
           main_forecast = dict(json_data_dict['weather'][0] )
           main_description = main_forecast['description']
           main_temp = dict(json_data_dict['main'])
-          temp = str(int(main_temp['temp']- Kelvin))
-           
+          temp = str(int(main_temp['temp']- Kelvin)) + "℃"       
        else:
          print ("no data received")
     else:
@@ -88,7 +91,7 @@ def show_news():
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     temp = {}
-    url_data = req.get(news_headline_url)
+    url_data = req.get(news_headlines_url)
     json_data_dict = dict(url_data.json())
     if url_data.status_code == 200:
     
