@@ -15,7 +15,7 @@ IP_Api_Key = os.environ["IPDATA_API_KEY"]
 Google_Api_Key = os.environ["GOOGLE_MAPS_API_KEY"]
 REDIS_HOST = os.environ["REDIS_HOST"]
 news_headlines_url = "https://newsapi.org/v2/top-headlines?sources=rtl-nieuws&apiKey={}".format(News_Api_Key)
-news_topic_url = "https://newsapi.org/v2/everything?q=mathematics&from=2019-02-21&apiKey={}".format(News_Api_Key)
+news_topic_url = "https://newsapi.org/v2/everything?q=mathematics&from=2019-02-28&apiKey={}".format(News_Api_Key)
 weather_url = "https://api.openweathermap.org/data/2.5/weather?q=Aalsmeer,nl&appid={}".format(Weather_Api_Key)
 
 app = Flask(__name__)
@@ -96,7 +96,9 @@ def show_news():
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     temp = {}
     line1=""
-    url=""
+    url1=""
+    line2=""
+    url2=""
 
     url_data = req.get(news_headlines_url)
     json_data_dict = dict(url_data.json())
@@ -105,13 +107,27 @@ def show_news():
        if json_data_dict['status'] == 'ok':
           temp = dict(json_data_dict['articles'][0])
           line1 =  temp['title']
-          url = " Read more: " + temp['url']
+          url1 =  temp['url']
        else:
-        print ("no data received")
+        line1 = "no data received"
     else:
-      print ("sorry something went wrong " + url_data.text)
+      line1 = "sorry something went wrong " + url_data.text
     
-    return render_template("news.html", hostname=socket.gethostname(), visits=visits, api_key=News_Api_Key, line1=line1, url=url) 
+
+    url_data = req.get(news_topic_url)
+    json_data_dict = dict(url_data.json())
+    if url_data.status_code == 200:
+    
+       if json_data_dict['status'] == 'ok':
+          temp = dict(json_data_dict['articles'][0])
+          line2 =  temp['title']
+          url2 =  temp['url']
+       else:
+        line2 = "no data received"
+    else:
+      line2 = "sorry something went wrong " + url_data.text
+    
+    return render_template("news.html", hostname=socket.gethostname(), visits=visits, api_key=News_Api_Key, line1=line1, url1=url1, line2=line2, url2=url2) 
 
 @app.route('/about')
 def show_about():
