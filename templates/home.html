@@ -1,34 +1,39 @@
 {% extends "template.html" %}
 {% block content %}
-
 <style>
+    div.weather {
+        max-width:600px;
+        margin:auto;
+        position:center;
 
-    div.image {
-        max-width: 600px;
-        max-height: 500px;
-        margin: auto;
-        box-sizing: border-box;
     }
-
-        div.image img {
-            width: 50%;
-            height: 50%;
-        }
 </style>
 
 
 <h2>Homepage of Peterv748</h2>
-<iframe width="300"
-        height="300"
-        frameborder="0" style="border:0"
-        src="https://www.google.com/maps/embed/v1/place?key={{api_key}}&q=Aalsmeer,Netherlands"></iframe>
-<iframe width="300"
-        height="300"
-        frameborder="0" style="border:0"
-        src="https://www.google.com/maps/embed/v1/streetview?key={{api_key}}&location=52.2621639,4.7619222&heading=180"></iframe>
+<div class="weather" id="openweathermap-widget-18"></div>
+   <script>
+       window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
+       window.myWidgetParam.push({ id: 18, cityid: '2760134', appid: '4a110614200ca76d4ed859addbc5fd00', units: 'metric', containerid: 'openweathermap-widget-18', });
+    (function () {
+        var script = document.createElement('script'); script.async = true; script.charset = "utf-8";
+        script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+        })();
+    </script>
+<h3>{{message}}</h3>
+ 
 
-<h3>{{message}}</h3> 
-  
+<iframe width="300"
+        height="300"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key={{api_key}}&q=Aalsmeer,Netherlands">
+</iframe>
+<iframe width="300"
+        height="300"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/streetview?key={{api_key}}&location=52.2621639,4.7619222&heading=180">
+</iframe>
 
 
 <p><a><small>Courtesy: peterv748</small></a></p>
