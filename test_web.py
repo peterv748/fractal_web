@@ -20,6 +20,8 @@ REDIS_HOST = os.environ["REDIS_HOST"]
 news_headlines_url = "https://newsapi.org/v2/top-headlines?sources=rtl-nieuws&apiKey={}".format(News_Api_Key)
 news_topic_url = "https://newsapi.org/v2/everything?q=mathematics&from=2019-03-04&apiKey={}".format(News_Api_Key)
 weather_url = "https://api.openweathermap.org/data/2.5/weather?q=Aalsmeer,nl&appid={}".format(Weather_Api_Key)
+streetview_url = "https://www.google.com/maps/embed/v1/streetview?location=52.2621639,4.7619222&heading=180&key={}".format(Google_Api_Key)
+google_maps_url = "https://www.google.com/maps/embed/v1/place?q=Aalsmeer,Netherlands&key={}".format(Google_Api_Key)
 
 app = Flask(__name__)
 temp = None
@@ -71,7 +73,7 @@ def show_home():
     else:
       print ("sorry something went wrong, no connection " + url_data.text)
 
-    return render_template("home.html", hostname=socket.gethostname(), visits=visits, api_key=Google_Api_Key, message = message)
+    return render_template("home.html", hostname=socket.gethostname(), visits=visits, google_maps_url=google_maps_url, streetview_url=streetview_url, message = message)
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/fractals index page
@@ -177,7 +179,7 @@ def show_news():
     else:
       line2 = "sorry something went wrong " + url_data.text
     
-    return render_template("news_index.html", hostname=socket.gethostname(), visits=visits, api_key=News_Api_Key, line1=line1, url1=url1, url_for_image1=url_for_image1, line2=line2, url2=url2, url_for_image2=url_for_image2) 
+    return render_template("news_index.html", hostname=socket.gethostname(), visits=visits, line1=line1, url1=url1, url_for_image1=url_for_image1, line2=line2, url2=url2, url_for_image2=url_for_image2) 
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/about" page
