@@ -6,8 +6,11 @@ import socket
 from datetime import datetime
 import json
 import requests as req
+import copy
 
-
+#---------------------------------------------------------------------------------------------------------------------
+#definition adn initialization of environment variables; set up of redis database; and initialize Flask app
+#---------------------------------------------------------------------------------------------------------------------
 
 News_Api_Key = os.environ["NEWSORG_API_KEY"]
 Weather_Api_Key = os.environ["OMW_API_KEY"]
@@ -34,6 +37,9 @@ try:
 except RedisError:
     temp = None
 
+#---------------------------------------------------------------------------------------------------------------------
+# handler for the "/" and "home" page
+#---------------------------------------------------------------------------------------------------------------------
 @app.route('/')
 @app.route('/home')
 def show_home():
@@ -67,6 +73,10 @@ def show_home():
 
     return render_template("home.html", hostname=socket.gethostname(), visits=visits, api_key=Google_Api_Key, message = message)
 
+#---------------------------------------------------------------------------------------------------------------------
+# handler for the "/fractals index page
+#---------------------------------------------------------------------------------------------------------------------
+
 @app.route('/fractals')
 def show_fractal_index():
     try:
@@ -74,6 +84,10 @@ def show_fractal_index():
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     return render_template("fractal_index.html", hostname=socket.gethostname(), visits=visits)
+
+#---------------------------------------------------------------------------------------------------------------------
+# handler for the "/images page, where the fractal images are displayed
+#---------------------------------------------------------------------------------------------------------------------
 
 @app.route('/<string:imagename>')
 def show_fractal_picture(imagename):
@@ -87,6 +101,10 @@ def show_fractal_picture(imagename):
     full_filename = url_for('static', filename=image_path)
 
     return render_template("fractals.html", user_image = full_filename, hostname=socket.gethostname(), visits=visits)
+
+#---------------------------------------------------------------------------------------------------------------------
+# handler for the "/news" page
+#---------------------------------------------------------------------------------------------------------------------
 
 @app.route('/news')
 def show_news():
@@ -122,6 +140,7 @@ def show_news():
              article_summary_headlines.append(temp['title'])
              article_summary_headlines.append(temp['url'])  
              article_summary_headlines.append(temp['urlToImage']) 
+             output_list_headlines.append(copy.deepcopy(article_summary_headlines))
              key = key + 1
              article_summary_headlines.clear()
 
@@ -145,7 +164,8 @@ def show_news():
              temp = dict(json_data_dict['articles'][key])
              article_summary_math_headlines.append(temp['title'])
              article_summary_math_headlines.append(temp['url'])  
-             article_summary_math_headlines.append(temp['urlToImage']) 
+             article_summary_math_headlines.append(temp['urlToImage'])
+             output_list_math_headlines.append(copy.deepcopy(article_summary_headlines))
              key = key + 1
              article_summary_headlines.clear()
 
@@ -159,6 +179,10 @@ def show_news():
     
     return render_template("news_index.html", hostname=socket.gethostname(), visits=visits, api_key=News_Api_Key, line1=line1, url1=url1, url_for_image1=url_for_image1, line2=line2, url2=url2, url_for_image2=url_for_image2) 
 
+#---------------------------------------------------------------------------------------------------------------------
+# handler for the "/about" page
+#---------------------------------------------------------------------------------------------------------------------
+
 @app.route('/about')
 def show_about():
     try:
@@ -168,6 +192,10 @@ def show_about():
 
     return render_template("about.html", hostname=socket.gethostname(), visits=visits)
 
+#---------------------------------------------------------------------------------------------------------------------
+# handler for the "/contact"  page
+#---------------------------------------------------------------------------------------------------------------------
+
 @app.route('/contact')
 def show_contact():
     try:
@@ -176,6 +204,10 @@ def show_contact():
         visits = "<i>cannot connect to Redis, counter disabled</i>"
 
     return render_template("contact.html", hostname=socket.gethostname(), visits=visits)
+
+#---------------------------------------------------------------------------------------------------------------------
+# handler for the "/webhook" page, first submenu page
+#---------------------------------------------------------------------------------------------------------------------
 
 @app.route('/web_hook', methods=['GET','POST'])
 def show_web_hook():
@@ -215,6 +247,10 @@ def show_web_hook():
 
     return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=message_post, message_get=message_get, date_time=date_time_str, date_time_now=date_time_now_str)
 
+#---------------------------------------------------------------------------------------------------------------------
+# handler for the "/link2" page, second submenu page
+#---------------------------------------------------------------------------------------------------------------------
+
 @app.route('/link2')
 def show_link2():
     try:
@@ -223,6 +259,10 @@ def show_link2():
         visits = "<i>cannot connect to Redis, counter disabled</i>"
 
     return render_template("link2.html", hostname=socket.gethostname(), visits=visits)
+
+#---------------------------------------------------------------------------------------------------------------------
+# handler for the "/link3" page, third submenu page
+#---------------------------------------------------------------------------------------------------------------------
 
 @app.route('/link3')
 def show_link3():
