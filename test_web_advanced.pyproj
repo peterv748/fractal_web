@@ -55,7 +55,7 @@
     <Content Include="templates\archive\test_simple_topnavbar.html" />
     <Content Include="templates\archive\test_simple_topnavbar2.html" />
     <Content Include="templates\fractals.html" />
-    <Content Include="templates\fractal_index.html" />
+    <Content Include="templates\news_index.html" />
     <Content Include="templates\home.html" />
     <Content Include="templates\web_hook.html" />
     <Content Include="templates\link2.html" />

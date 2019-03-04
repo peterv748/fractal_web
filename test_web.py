@@ -15,7 +15,7 @@ IP_Api_Key = os.environ["IPDATA_API_KEY"]
 Google_Api_Key = os.environ["GOOGLE_MAPS_API_KEY"]
 REDIS_HOST = os.environ["REDIS_HOST"]
 news_headlines_url = "https://newsapi.org/v2/top-headlines?sources=rtl-nieuws&apiKey={}".format(News_Api_Key)
-news_topic_url = "https://newsapi.org/v2/everything?q=mathematics&from=2019-02-28&apiKey={}".format(News_Api_Key)
+news_topic_url = "https://newsapi.org/v2/everything?q=mathematics&from=2019-03-04&apiKey={}".format(News_Api_Key)
 weather_url = "https://api.openweathermap.org/data/2.5/weather?q=Aalsmeer,nl&appid={}".format(Weather_Api_Key)
 
 app = Flask(__name__)
@@ -97,8 +97,10 @@ def show_news():
     temp = {}
     line1=""
     url1=""
+    url_for_image1=""
     line2=""
     url2=""
+    url_for_image2=""
 
     url_data = req.get(news_headlines_url)
     json_data_dict = dict(url_data.json())
@@ -108,6 +110,7 @@ def show_news():
           temp = dict(json_data_dict['articles'][0])
           line1 =  temp['title']
           url1 =  temp['url']
+          url_for_image1 = temp['urlToImage']
        else:
         line1 = "no data received"
     else:
@@ -122,12 +125,13 @@ def show_news():
           temp = dict(json_data_dict['articles'][0])
           line2 =  temp['title']
           url2 =  temp['url']
+          url_for_image2 = temp['urlToImage']
        else:
         line2 = "no data received"
     else:
       line2 = "sorry something went wrong " + url_data.text
     
-    return render_template("news.html", hostname=socket.gethostname(), visits=visits, api_key=News_Api_Key, line1=line1, url1=url1, line2=line2, url2=url2) 
+    return render_template("news_index.html", hostname=socket.gethostname(), visits=visits, api_key=News_Api_Key, line1=line1, url1=url1, url_for_image1=url_for_image1, line2=line2, url2=url2, url_for_image2=url_for_image2) 
 
 @app.route('/about')
 def show_about():
