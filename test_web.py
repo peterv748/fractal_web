@@ -94,6 +94,7 @@ def show_news():
         visits = redis.incr("counter")
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
+    
     temp = {}
     line1=""
     url1=""
@@ -101,13 +102,29 @@ def show_news():
     line2=""
     url2=""
     url_for_image2=""
+    number_of_headlines = 0
+    output_list_headlines = []
+    article_summary_headlines = []
+    number_of_math_headlines = 0
+    output_list_math_headlines = []
+    article_summary_math_headlines = []
 
     url_data = req.get(news_headlines_url)
     json_data_dict = dict(url_data.json())
+ 
     if url_data.status_code == 200:
     
        if json_data_dict['status'] == 'ok':
-          temp = dict(json_data_dict['articles'][0])
+          number_of_headlines = len(json_data_dict['articles'])
+          key = 0
+          while ((key < number_of_headlines) and (key < 10)):
+             temp = dict(json_data_dict['articles'][key])
+             article_summary_headlines.append(temp['title'])
+             article_summary_headlines.append(temp['url'])  
+             article_summary_headlines.append(temp['urlToImage']) 
+             key = key + 1
+             article_summary_headlines.clear()
+
           line1 =  temp['title']
           url1 =  temp['url']
           url_for_image1 = temp['urlToImage']
@@ -122,7 +139,16 @@ def show_news():
     if url_data.status_code == 200:
     
        if json_data_dict['status'] == 'ok':
-          temp = dict(json_data_dict['articles'][0])
+          number_of_math_headlines = len(json_data_dict['articles'])
+          key = 0
+          while ((key < number_of_headlines) and (key < 10)):
+             temp = dict(json_data_dict['articles'][key])
+             article_summary_math_headlines.append(temp['title'])
+             article_summary_math_headlines.append(temp['url'])  
+             article_summary_math_headlines.append(temp['urlToImage']) 
+             key = key + 1
+             article_summary_headlines.clear()
+
           line2 =  temp['title']
           url2 =  temp['url']
           url_for_image2 = temp['urlToImage']
