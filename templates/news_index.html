@@ -52,108 +52,58 @@
 <div class="flex_container">
    <div class="table_news" style="flex-basis: 300px">
        <table border="0" align="center" width="100%">
-           <tr>
+           <thead>
+             <tr>
                <th colspan="2">Local headlines</th>
-           </tr>
-
+             </tr>
+           </thead>
+           <tbody>
+           {% for index in params_headlines %}
            <tr>
                <td>
                    <div class="gallery_item">
-                       <a><img src="{{url_for_image1}}"> </a>
+                       <a><img src="{{index.urlToImage}}"> </a>
                    </div>
                </td>
 
                <td>
                    <div class="newsitem">
-                       <a href="{{url1}}" style="color:white" target="_blank">{{line1}}></a>
+                       <a href="{{index.url}}" style="color:white" target="_blank">{{index.title}}></a>
                    </div>
                </td>
 
            </tr>
-
-           <tr>
-               <td>
-                   <div class="gallery_item">
-                       <a><img src="{{url_for_image1}}"> </a>
-                   </div>
-               </td>
-
-               <td>
-                   <div class="newsitem">
-                       <a href="{{url1}}" style="color:white" target="_blank">{{line1}}></a>
-                   </div>
-               </td>
-
-           </tr>
-
-           <tr>
-               <td>
-                   <div class="gallery_item">
-                       <a><img src="{{url_for_image1}}"> </a>
-                   </div>
-               </td>
-
-               <td>
-                   <div class="newsitem">
-                       <a href="{{url1}}" style="color:white" target="_blank">{{line1}}></a>
-                   </div>
-               </td>
-
-           </tr>
+           {% endfor %}
+           </tbody>
        </table>
    </div>
 
 
    <div class="table_news" style="flex-basis: 300px">
        <table border="0" align="center" width="100%">
-           <tr>
-               <th colspan="2">Maths headlines</th>
-           </tr>
+           <thead>
+               <tr>
+                   <th colspan="2">Math headlines</th>
+               </tr>
+           </thead>
+           <tbody>
+               {% for index in params_maths %}
+               <tr>
+                   <td>
+                       <div class="gallery_item">
+                           <a><img src="{{index.urlToImage}}"> </a>
+                       </div>
+                   </td>
 
-           <tr>
-               <td>
-                   <div class="gallery_item">
-                       <a><img src="{{url_for_image2}}"> </a>
-                   </div>
-               </td>
+                   <td>
+                       <div class="newsitem">
+                           <a href="{{index.url}}" style="color:white" target="_blank">{{index.title}}></a>
+                       </div>
+                   </td>
 
-               <td>
-                   <div class="newsitem">
-                       <a href="{{url2}}" style="color:white" target="_blank">{{line2}}></a>
-                   </div>
-               </td>
-
-           </tr>
-
-           <tr>
-               <td>
-                   <div class="gallery_item">
-                       <a><img src="{{url_for_image2}}"> </a>
-                   </div>
-               </td>
-
-               <td>
-                   <div class="newsitem">
-                       <a href="{{url2}}" style="color:white" target="_blank">{{line2}}></a>
-                   </div>
-               </td>
-
-           </tr>
-
-           <tr>
-               <td>
-                   <div class="gallery_item">
-                       <a><img src="{{url_for_image2}}"> </a>
-                   </div>
-               </td>
-
-               <td>
-                   <div class="newsitem">
-                       <a href="{{url2}}" style="color:white" target="_blank">{{line2}}></a>
-                   </div>
-               </td>
-
-           </tr>
+               </tr>
+               {% endfor %}
+           </tbody>
        </table>
    </div>
 </div>

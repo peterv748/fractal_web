@@ -125,9 +125,11 @@ def show_news():
     number_of_headlines = 0
     output_list_headlines = []
     article_summary_headlines = []
+    article_math_headlines = []
     number_of_math_headlines = 0
     output_list_math_headlines = []
     article_summary_math_headlines = []
+    params=[]
 
     url_data = req.get(news_headlines_url)
     json_data_dict = dict(url_data.json())
@@ -139,16 +141,9 @@ def show_news():
           key = 0
           while ((key < number_of_headlines) and (key < 10)):
              temp = dict(json_data_dict['articles'][key])
-             article_summary_headlines.append(temp['title'])
-             article_summary_headlines.append(temp['url'])  
-             article_summary_headlines.append(temp['urlToImage']) 
-             output_list_headlines.append(copy.deepcopy(article_summary_headlines))
+             output_list_headlines.append(temp)
              key = key + 1
-             article_summary_headlines.clear()
 
-          line1 =  temp['title']
-          url1 =  temp['url']
-          url_for_image1 = temp['urlToImage']
        else:
         line1 = "no data received"
     else:
@@ -157,6 +152,7 @@ def show_news():
 
     url_data = req.get(news_topic_url)
     json_data_dict = dict(url_data.json())
+    
     if url_data.status_code == 200:
     
        if json_data_dict['status'] == 'ok':
@@ -164,22 +160,16 @@ def show_news():
           key = 0
           while ((key < number_of_headlines) and (key < 10)):
              temp = dict(json_data_dict['articles'][key])
-             article_summary_math_headlines.append(temp['title'])
-             article_summary_math_headlines.append(temp['url'])  
-             article_summary_math_headlines.append(temp['urlToImage'])
-             output_list_math_headlines.append(copy.deepcopy(article_summary_headlines))
+             output_list_math_headlines.append(temp)
              key = key + 1
-             article_summary_headlines.clear()
 
-          line2 =  temp['title']
-          url2 =  temp['url']
-          url_for_image2 = temp['urlToImage']
        else:
         line2 = "no data received"
     else:
       line2 = "sorry something went wrong " + url_data.text
     
-    return render_template("news_index.html", hostname=socket.gethostname(), visits=visits, line1=line1, url1=url1, url_for_image1=url_for_image1, line2=line2, url2=url2, url_for_image2=url_for_image2) 
+    
+    return render_template("news_index.html", hostname=socket.gethostname(), visits=visits, params_headlines=output_list_headlines, params_maths=output_list_math_headlines) 
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/about" page
