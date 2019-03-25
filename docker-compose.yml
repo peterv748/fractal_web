@@ -5,6 +5,8 @@ services:
     image: peterv748/fractal_demo
     deploy:
       replicas: 5
+      placement:
+        constraints: [node.role == worker]
       restart_policy:
         condition: on-failure
       resources:
