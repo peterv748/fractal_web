@@ -10,6 +10,7 @@ import copy
 
 #---------------------------------------------------------------------------------------------------------------------
 #definition adn initialization of environment variables; set up of redis database; and initialize Flask app
+# creation  news, weather and google maps url's
 #---------------------------------------------------------------------------------------------------------------------
 
 News_Api_Key = os.environ["NEWSORG_API_KEY"]
