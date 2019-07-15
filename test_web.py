@@ -119,15 +119,9 @@ def show_news():
     
     temp = {}
     line1=""
-    url1=""
-    url_for_image1=""
     line2=""
-    url2=""
-    url_for_image2=""
     number_of_headlines = 0
     output_list_headlines = []
-    article_summary_headlines = []
-    article_math_headlines = []
     number_of_math_headlines = 0
     output_list_math_headlines = []
     article_summary_math_headlines = []
@@ -160,7 +154,7 @@ def show_news():
        if json_data_dict['status'] == 'ok':
           number_of_math_headlines = len(json_data_dict['articles'])
           key = 0
-          while ((key < number_of_headlines) and (key < 10)):
+          while ((key < number_of_math_headlines) and (key < 10)):
              temp = dict(json_data_dict['articles'][key])
              output_list_math_headlines.append(temp)
              key = key + 1
