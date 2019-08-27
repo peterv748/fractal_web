@@ -120,8 +120,6 @@ def show_news():
     temp = {}
     number_of_headlines = 0
     number_of_math_headlines = 0
-    line1 = ""
-    line2 = ""
     output_list_headlines = []
     output_list_math_headlines = []
     url_data = req.get(news_headlines_url)
