@@ -118,7 +118,14 @@ def show_news():
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     
     temp = {}
+<<<<<<< HEAD
     number_of_headlines = 0
+=======
+    line1=""
+    line2=""
+    number_of_headlines = 0
+    output_list_headlines = []
+>>>>>>> 0bb470fa990db7ba8c235b73894913c9cb463a0d
     number_of_math_headlines = 0
     output_list_headlines = []
     output_list_math_headlines = []
