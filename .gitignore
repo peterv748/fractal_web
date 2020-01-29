@@ -260,8 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 
-# bat files for environment variables
 *.bat
-
-# .env files for environment variables
-*.env
+*.vscode

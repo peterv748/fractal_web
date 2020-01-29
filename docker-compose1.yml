@@ -2,8 +2,8 @@ version: "3.6"
 services:
   web:
     # replace username/repo:tag with your name and image details
-    # image: peterv748/fractal_demo
-    build: .
+    image: fractal_test
+    # build: .
     #  deploy:
     #    replicas: 2
     #      placement:

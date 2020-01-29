@@ -4,21 +4,21 @@ services:
     # replace username/repo:tag with your name and image details
     # image: peterv748/fractal_demo
     build: .
-    #  deploy:
-    #    replicas: 2
-    #      placement:
-    #      constraints: [node.role == worker]
-    #    restart_policy:
-    #      condition: on-failure
-    #  resources:
-    #    limits:
-    #      cpus: "0.1"
-    #      memory: 50M
-    #  update_config:
-    #    parallelism: 2
-    #    delay: 1s
-    #    monitor: 1s
-    #    order: stop-first
+      deploy:
+        replicas: 2
+          placement:
+          constraints: [node.role == worker]
+        restart_policy:
+          condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      update_config:
+        parallelism: 2
+        delay: 1s
+        monitor: 1s
+        order: stop-first
     ports:
       - "4000:80"
     networks:
@@ -32,9 +32,9 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-    #deploy:
-    #   placement:
-    #constraints: [node.role == manager]
+    deploy:
+       placement:
+    constraints: [node.role == manager]
     networks:
       - webnet
 
@@ -44,9 +44,9 @@ services:
       - "6379:6379"
     volumes:
       - "/mnt/d/peter/Documents/python code/dev/test_web_advanced/test_web_advanced-1/data:/data"
-    #deploy:
-    #  placement:
-    #     constraints: [node.role == manager]
+    deploy:
+      placement:
+         constraints: [node.role == manager]
     command: redis-server --appendonly yes
     networks:
       - webnet

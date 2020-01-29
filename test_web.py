@@ -51,6 +51,7 @@ def show_home():
         visits = redis.incr("counter")
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
+  
     Kelvin = 273.15
     main_forecast = {}
     main_description = ""
