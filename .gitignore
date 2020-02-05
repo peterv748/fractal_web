@@ -260,5 +260,6 @@ paket-files/
 __pycache__/
 *.pyc
 
-*.bat
+setenv.bat
 *.vscode
+./data/*.*
