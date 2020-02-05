@@ -1,4 +1,4 @@
-# test_web_advanced
+# fractal web demo
 Fractal demo on web; using FLASK, Python, Docker
 this is a home brew project to understand:
  - Github
