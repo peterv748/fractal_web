@@ -1,0 +1,114 @@
+{% extends "template.html" %}
+{% block content %}
+<h2>News Headlines</h2>
+
+<style>
+    div.table_news {
+        max-width: 300px;
+        max-height: 400px;
+        margin: auto;
+        overflow: auto;
+        box-sizing: border-box;
+    }
+
+    div.gallery_item {
+        max-width: 100px;
+        max-height: 100px;
+        margin: auto;
+        box-sizing: border-box;
+    }
+
+        div.gallery_item:hover {
+            border: 1px solid #777;
+        }
+
+        div.gallery_item img {
+            width: 100%;
+            height: 100%;
+            opacity: 1.0
+        }
+
+            div.gallery_item img:hover {
+                opacity: 1.0
+            }
+
+    div.newsitem {
+        box-sizing: border-box;
+        text-align: center;
+        width: 200px;
+        height: 100%;
+    }
+
+    .flex_container {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        justify-content: center;
+        height: 500px;
+    }
+</style>
+
+
+<div class="flex_container">
+   <div class="table_news" style="flex-basis: 300px">
+       <table border="0" align="center" width="100%">
+           <thead>
+             <tr>
+               <th colspan="2">Local headlines</th>
+             </tr>
+           </thead>
+           <tbody>
+           {% for index in params_headlines %}
+           <tr>
+               <td>
+                   <div class="gallery_item">
+                       <a><img src="{{index.urlToImage}}"> </a>
+                   </div>
+               </td>
+
+               <td>
+                   <div class="newsitem">
+                       <a href="{{index.url}}" style="color:white" target="_blank">{{index.title}}></a>
+                   </div>
+               </td>
+
+           </tr>
+           {% endfor %}
+           </tbody>
+       </table>
+   </div>
+
+
+   <div class="table_news" style="flex-basis: 300px">
+       <table border="0" align="center" width="100%">
+           <thead>
+               <tr>
+                   <th colspan="2">Math headlines</th>
+               </tr>
+           </thead>
+           <tbody>
+               {% for index in params_maths %}
+               <tr>
+                   <td>
+                       <div class="gallery_item">
+                           <a><img src="{{index.urlToImage}}"> </a>
+                       </div>
+                   </td>
+
+                   <td>
+                       <div class="newsitem">
+                           <a href="{{index.url}}" style="color:white" target="_blank">{{index.title}}></a>
+                       </div>
+                   </td>
+
+               </tr>
+               {% endfor %}
+           </tbody>
+       </table>
+   </div>
+</div>
+
+<p><a><small>Courtesy: peterv748 and NEWSAPI.ORG and RTL Nieuws</small></a></p>
+<p><a><small>Number of visitors: "{{visits}}"</small></a></p>
+<p><a><small>Hostname: "{{hostname}}"</small></a></p>
+{% endblock %}
