@@ -1,4 +1,4 @@
-version: "3.6"
+version: "3.7"
 services:
   web:
     # replace username/repo:tag with your name and image details
@@ -43,7 +43,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - "/mnt/d/peter/Documents/python code/dev/test_web_advanced/test_web_advanced-1/data:/data"
+      - "/mnt/d/peter/Documents/python code/dev/fractal_web/data:/data"
     #deploy:
     #  placement:
     #     constraints: [node.role == manager]
@@ -52,7 +52,7 @@ services:
       - webnet
 
   nginx:
-    image: nginx:latest
+    image: peterv748/mynginx_demo:version1
     ports:
       - "9000:80"
     #deploy:
