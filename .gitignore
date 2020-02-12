@@ -262,6 +262,6 @@ __pycache__/
 *.bat
 *.env
 *.vscode
-./data/*.*
+./data/*.aof
 *.yml
 *.yaml

@@ -54,7 +54,7 @@ services:
   nginx:
     image: peterv748/mynginx_demo:latest
     ports:
-      - "9000:80"
+      - "9000:4000"
     #deploy:
     #   placement:
     #constraints: [node.role == manager]
