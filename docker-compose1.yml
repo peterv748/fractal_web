@@ -52,7 +52,7 @@ services:
       - webnet
 
   nginx:
-    image: peterv748/mynginx_demo:version1
+    image: peterv748/mynginx_demo:latest
     ports:
       - "9000:80"
     #deploy:
