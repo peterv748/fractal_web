@@ -3,7 +3,6 @@ services:
   web:
     # replace username/repo:tag with your name and image details
     image: peterv748/fractal_demo:version1
-    container_name: web1
     # build: .
     #  deploy:
     #    replicas: 2
@@ -29,7 +28,6 @@ services:
 
   visualizer:
     image: dockersamples/visualizer:stable
-    container_name: visualizer1
     ports:
       - "8080:8080"
     volumes:
@@ -42,7 +40,6 @@ services:
 
   redis:
     image: redis
-    container_name: redis1
     ports:
       - "6379:6379"
     volumes:
@@ -54,16 +51,15 @@ services:
     networks:
       - webnet
 
-  nginx:
-    image: peterv748/mynginx_demo:latest
-    container_name: nginx1
-    ports:
-      - "9000:80"
-    #deploy:
+  #nginx:
+  #  image: peterv748/mynginx_demo:latest
+  #  ports:
+  #    - "9000:80"
+  #  #deploy:
     #   placement:
     #constraints: [node.role == manager]
-    networks:
-      - webnet
+  #  networks:
+  #    - webnet
 
 networks:
     webnet:
