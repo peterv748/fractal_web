@@ -51,15 +51,15 @@ services:
     networks:
       - webnet
 
-  #nginx:
-  #  image: peterv748/mynginx_demo:latest
-  #  ports:
-  #    - "9000:80"
+  nginx:
+    image: peterv748/mynginx_demo:latest
+    ports:
+      - "9000:80"
   #  #deploy:
     #   placement:
     #constraints: [node.role == manager]
-  #  networks:
-  #    - webnet
+    networks:
+      - webnet
 
 networks:
     webnet:
