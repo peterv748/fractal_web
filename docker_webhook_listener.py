@@ -13,6 +13,7 @@ import json
 import os
 
 from subprocess import Popen
+from subprocess import run
 
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
@@ -139,7 +140,39 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
 
+    def do_GET(self):
+    
+        logging.info("Path: %s", self.path)
+        
+        env = dict(os.environ)
 
+        # Check if the secret URL was called
+
+        token = args.token or os.environ.get("DOCKER_AUTH_TOKEN")
+        print(token)
+        if token == self.path[1:]:
+            print(args.cmd)
+            logging.info("Start executing '%s'" % args.cmd)
+
+            try:
+
+                Popen(args.cmd).wait()
+
+                self.send_response(200, "OK")
+
+            except OSError as err:
+
+                self.send_response(500, "OSError")
+
+                logging.error("You probably didn't use 'bash ./script.sh'.")
+
+                logging.error(err)
+
+        else:
+
+            self.send_response(401, "Not authorized")
+
+        self.end_headers()
 
 
 def get_parser():
