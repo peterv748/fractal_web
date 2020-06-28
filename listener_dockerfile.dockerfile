@@ -1,4 +1,5 @@
 # Use an official Python runtime as a parent image
+# FROM ubuntu:18.04
 FROM python:3.8
 
 # Set the working directory to /app
@@ -10,4 +11,4 @@ COPY . /test_web_app
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
-CMD ["python3.8", "docker_webhook_listener.py -t pvbv12748 -c "bash" "./say_hallo.sh""]
+CMD ["python", "docker_webhook_listener.py -t pvbv12748 -c bash ./say_hallo.sh"]

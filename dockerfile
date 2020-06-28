@@ -7,7 +7,7 @@ WORKDIR /test_web_app
 # Copy the current directory contents into the container at /app
 COPY . /test_web_app
 
-run python -m pip install --upgrade pip
+RUN python -m pip install --upgrade pip
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
