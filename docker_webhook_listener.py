@@ -153,7 +153,6 @@ class RequestHandler(BaseHTTPRequestHandler):
         if token == self.path[1:]:
             print(args.cmd)
             logging.info("Start executing '%s'" % args.cmd)
-
             try:
 
                 Popen(args.cmd).wait()
