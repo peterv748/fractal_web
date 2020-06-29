@@ -17,21 +17,21 @@ from subprocess import run
 
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
-try:
+# try:
 
     # For Python 3.0 and later
 
-    from http.server import HTTPServer
+from http.server import HTTPServer
 
-    from http.server import BaseHTTPRequestHandler
+from http.server import BaseHTTPRequestHandler
 
-except ImportError:
+# except ImportError:
 
     # Fall back to Python 2
 
-    from BaseHTTPServer import BaseHTTPRequestHandler
+#    from BaseHTTPServer import BaseHTTPRequestHandler
 
-    from BaseHTTPServer import HTTPServer as HTTPServer
+#    from BaseHTTPServer import HTTPServer as HTTPServer
 
 import sys
 
@@ -147,9 +147,10 @@ class RequestHandler(BaseHTTPRequestHandler):
         env = dict(os.environ)
 
         # Check if the secret URL was called
-
+        print(args.token,os.environ.get("DOCKER_AUTH_TOKEN"))
         token = args.token or os.environ.get("DOCKER_AUTH_TOKEN")
         print(token)
+        print(self.path[1:])
         if token == self.path[1:]:
             print(args.cmd)
             logging.info("Start executing '%s'" % args.cmd)
@@ -251,5 +252,6 @@ if __name__ == '__main__':
         sys.exit(1)
 
     args = parser.parse_args()
+    print(args.addr, args.port, args.token, args.cmd)
 
     main(args.addr, args.port)
