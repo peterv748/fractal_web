@@ -147,12 +147,11 @@ class RequestHandler(BaseHTTPRequestHandler):
         env = dict(os.environ)
 
         # Check if the secret URL was called
-        print(args.token,os.environ.get("DOCKER_AUTH_TOKEN"))
+       
         token = args.token or os.environ.get("DOCKER_AUTH_TOKEN")
-        print(token)
-        print(self.path[1:])
+        
         if token == self.path[1:]:
-            print(args.cmd)
+           
             logging.info("Start executing '%s'" % args.cmd)
             try:
 
@@ -252,6 +251,5 @@ if __name__ == '__main__':
         sys.exit(1)
 
     args = parser.parse_args()
-    print(args.addr, args.port, args.token, args.cmd)
 
     main(args.addr, args.port)

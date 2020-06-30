@@ -18,4 +18,4 @@ RUN pip install --trusted-host pypi.python.org -r reqs_listener.txt
 # Make port 80 available to the world outside this container
 EXPOSE 9555
 
-CMD ["python", "./docker_webhook_listener.py", "-t", "pvbv12748", "-c bash ./say_hallo.sh"]
+CMD ["python", "./docker_webhook_listener.py", "-t", "pvbv12748", "-c", "/bin/sh", "./say_hallo.sh"]
