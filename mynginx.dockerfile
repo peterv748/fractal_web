@@ -1,7 +1,10 @@
-FROM nginx
+FROM nginx:latest
 
-RUN rm /etc/nginx/conf.d/default.conf
-
-COPY ./backend.conf /etc/nginx/conf.d/default.conf
+# RUN rm /etc/nginx/conf.d/default.conf
+# VOLUME /var/log/nginx/error_log.log/
+# VOLUME /var/log/nginx
+COPY ./nginx.conf /etc/nginx/
+# COPY ./nginx.conf /etc/conf.d/default.conf
+COPY ./templates/home.html /data/www
 
 CMD ["nginx", "-g", "daemon off;"]
