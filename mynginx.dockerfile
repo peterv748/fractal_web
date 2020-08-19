@@ -5,6 +5,7 @@ FROM nginx:latest
 # VOLUME /var/log/nginx
 COPY ./nginx.conf /etc/nginx/
 # COPY ./nginx.conf /etc/conf.d/default.conf
-COPY ./templates/home.html /data/www
+COPY ./templates/index.html /data/www/
+RUN ls /data/www/
 
 CMD ["nginx", "-g", "daemon off;"]

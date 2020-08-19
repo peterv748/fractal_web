@@ -1,0 +1,234 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Some Page Title</title>
+        
+
+        <link rel="stylesheet" href=".\css\style.css" type="text/css" media="screen" />
+        
+        <link rel="stylesheet" href=".\css\style-responsive-main.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    
+        <style>
+            /* make the cells output their value */
+               td[Connectivity]:after {
+                 content: attr(Connectivity);
+               }
+           
+               /* make connection-status down  in red */
+               td[Connectivity^="Down"]:after {
+                 background-color: red;
+                 content: ' \2639';
+               }
+           
+               /* make connection-status Up  in green */
+               td[Connectivity^="Up"]:after {
+                 background-color: green;
+                 content: ' \263A';
+               }
+           
+            </style> 
+	</head>
+
+	<body>
+        <header>
+            <label for="show-menu" class="show-menu">Menu</label>
+            <input type="checkbox" id="show-menu" role="button">
+
+            <ul id="menu">
+                <li><a href="link 1"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="link 2"><i class="fas fa-newspaper"></i> fill in</a></li>
+                <li><a href="link 3"><i class="fas fa-images"></i> fill in</a></li>
+                <li><a href="link 4"><i class="far fa-envelope"></i> Contact</a></li>
+                <li><a href="link 5"><i class="fas fa-user"></i> About</a></li>
+                <li class="dropdown" >
+                    <a class="dropbtn" href="#"><i class="fas fa-bars"></i> Menu</a>
+                    <div class="dropdown-content">
+                        <a href="link 1">fill in</a>
+                        <a href="link 2">fill in</a>
+                        <a href="link 3">refresh</a>
+                    </div>
+                </li>
+            </ul>
+          
+                    
+            <h1>IPC Endpoint Overview</h1>
+            <p>A Proof of Concept</p>           
+            
+            
+        </header>
+        
+        
+        <section id="four_columns">
+            <h2>
+                Status
+            </h2>    
+            <article class="img-item">
+                <figure>  
+                    <table>
+   <caption><h2>ansible_prod</h2></caption>
+<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
+<td>https://ansible.infra.ing.net</td><td Connectivity="Up"></td><td>294</td><td>06-05-2020 16:23:53</td></tr>
+</table>
+                </figure>
+            </article>
+            <article class="img-item">
+                <figure>  
+                    <table>
+   <caption><h2>artifactory</h2></caption>
+<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
+<td>https://artifactory.ing.net</td><td Connectivity="Up"></td><td>323</td><td>06-05-2020 16:23:53</td></tr>
+</table>
+                </figure>
+            </article>
+            <article class="img-item">
+                <figure>  
+                    big_fi
+                </figure>
+            </article>   
+            <article class="img-item">
+                <figure>  
+                    <table>
+   <caption><h2>gitlab_ing</h2></caption>
+<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
+<td>https://gitlab.ing.net</td><td Connectivity="Up"></td><td>391</td><td>06-05-2020 16:23:52</td></tr>
+</table>
+                </figure>
+            </article>
+            <article class="img-item">
+                <figure>  
+                    <table>
+   <caption><h2>ipam</h2></caption>
+<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
+<td>https://www.ipam.intranet/</td><td Connectivity="Up"></td><td>410</td><td>06-05-2020 16:23:55</td></tr>
+</table>
+                </figure>
+            </article>
+            <article class="img-item">
+                <figure>  
+                    <table>
+   <caption><h2>portal</h2></caption>
+<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
+<td>https://cloud.ing.net/</td><td Connectivity="Down"></td><td>301</td><td>06-05-2020 16:23:41</td></tr>
+</table>
+                </figure>
+            </article>
+            <article class="img-item">
+                <figure>  
+                    <table>
+   <caption><h2>snow</h2></caption>
+<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
+<td>https://ing.service-now.com</td><td Connectivity="Up"></td><td>267</td><td>06-05-2020 16:23:51</td></tr>
+</table>
+                </figure>
+            </article>
+            <article class="img-item">
+                <figure>  
+                    <table>
+   <caption><h2>vrbe</h2></caption>
+<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
+<td>https://clrv0000013419.ic.ing.net:8443/</td><td Connectivity="Up"></td><td>303</td><td>06-05-2020 16:23:51</td></tr>
+</table>
+                </figure>
+            </article>
+            <article class="img-item">
+                <figure>  
+                    <table>
+   <caption><h2>sollar</h2></caption>
+<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
+<td>https://sollar.iam.ing.net</td><td Connectivity="Down"></td><td>704</td><td>06-05-2020 16:23:55</td></tr>
+</table>
+                </figure>
+            </article>
+            <article class="img-item">
+                <figure>  
+                    <table>
+   <caption><h2>pwv</h2></caption>
+<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
+<td>https://pwv.europe.intranet/PasswordVault/WebServices/</td><td Connectivity="Down"></td><td>224</td><td>06-05-2020 16:23:54</td></tr>
+</table>
+                </figure>
+            </article>
+            <article class="img-item">
+                <figure>
+                    <table>
+   <caption><h2>tenant_names</h2></caption>
+<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/infranl/</td><td Connectivity="Up"></td><td>120</td><td>06-05-2020 16:23:44</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/bankinfra/</td><td Connectivity="Up"></td><td>164</td><td>06-05-2020 16:23:42</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/wbs/</td><td Connectivity="Up"></td><td>120</td><td>06-05-2020 16:23:42</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/dbnl/</td><td Connectivity="Up"></td><td>139</td><td>06-05-2020 16:23:43</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/ingcng/</td><td Connectivity="Up"></td><td>127</td><td>06-05-2020 16:23:50</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/tchpl/</td><td Connectivity="Up"></td><td>173</td><td>06-05-2020 16:23:50</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/inglu/</td><td Connectivity="Up"></td><td>177</td><td>06-05-2020 16:23:49</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/gs/</td><td Connectivity="Up"></td><td>129</td><td>06-05-2020 16:23:43</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/ipcch/</td><td Connectivity="Up"></td><td>175</td><td>06-05-2020 16:23:49</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/ingfr/</td><td Connectivity="Up"></td><td>211</td><td>06-05-2020 16:23:48</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/ingcz/</td><td Connectivity="Up"></td><td>220</td><td>06-05-2020 16:23:47</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/ingde/</td><td Connectivity="Up"></td><td>174</td><td>06-05-2020 16:23:47</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/inges/</td><td Connectivity="Up"></td><td>167</td><td>06-05-2020 16:23:46</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/ingit/</td><td Connectivity="Up"></td><td>167</td><td>06-05-2020 16:23:46</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/isro/</td><td Connectivity="Up"></td><td>333</td><td>06-05-2020 16:23:45</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/ingro/</td><td Connectivity="Up"></td><td>134</td><td>06-05-2020 16:23:45</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/ingbe/</td><td Connectivity="Up"></td><td>122</td><td>06-05-2020 16:23:44</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/ingpl/</td><td Connectivity="Up"></td><td>170</td><td>06-05-2020 16:23:48</td></tr>
+<td>https://ipcloud.ic.ing.net/vcac/org/ingau/</td><td Connectivity="Up"></td><td>171</td><td>06-05-2020 16:23:48</td></tr>
+</table>
+                </figure>
+            </article>
+            <br class="clear"/>
+        </section>
+        
+        <section id="text_columns">
+        	<h2 class="hidden">Blindtext</h2>
+            <article class="column1">    
+                <h3>Dolor sit amet</h3>
+                <p>Unterwegs traf es eine Copy. Die Copy warnte das Blindtextchen, da, wo sie herkäme wäre sie zigmal umgeschrieben worden und alles, was von ihrem Ursprung noch übrig wäre, sei das Wort "und" und das Blindtextchen solle umkehren und wieder in sein eigenes, sicheres Land zurückkehren.</p>
+                <p>Doch alles Gutzureden konnte es nicht überzeugen und so dauerte es nicht lange, bis ihm ein paar heimtückische Werbetexter auflauerten, es mit Longe und Parole betrunken machten und es dann in ihre Agentur schleppten, wo sie es für ihre Projekte wieder und wieder mißbrauchten.</p>
+            </article>
+            <section class="column2">
+            	<h3 class="hidden">Lorem Impsum</h3>
+                <article class="row">  
+                    <h4 class="hidden">Dolor sit</h4>  
+                    <a href="img\just_an_image.jpg" title="Some title">               
+                    <img src="img\just_an_image.jpg" width="80" alt="Some alt text"/>
+                    </a>
+                    <p>Und wenn es nicht umgeschrieben wurde, dann benutzen Sie es immernoch.</p>
+                </article> 
+                <article class="row">
+                    <h4 class="hidden">Ipsum</h4>
+                    <a href="img\just_an_image.jpg" title="Some title">               
+                    <img src="img\just_an_image.jpg" width="80" alt="Some alt text"/>
+                    </a>
+                    <p>Doch alles Gutzureden konnte es nicht überzeugen und so dauerte es nicht lange.</p>
+                </article>   
+            </section>
+        </section>
+
+        <footer>
+        	<h2 class="hidden">Our footer</h2>
+            <section id="copyright">
+            	<h3 class="hidden">Copyright notice</h3>
+                <div class="wrapper">
+                   &copy; Copyright 2020 by <a href="http://www.example.com">Example</a> All Rights Reserved.
+                </div>
+            </section>
+            <section class="wrapper">
+            	<h3 class="hidden">Footer content</h3>
+                <article class="column">
+                    <h4>Lorem ipsum</h4>
+                </article>
+                <article class="column midlist">
+                    <h4>Consectetuer</h4>
+                </article>
+                <article class="column rightlist">
+                    <h4>Dolor sit amet</h4>
+                </article>
+            </section>
+        </footer>
+	</body>
+</html>
+
