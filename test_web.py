@@ -35,9 +35,10 @@ try:
     else:
         if REDIS_HOST == "redis":
            redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
-    redis.set("counter", 0)
-    redis.set("laststackdeploy", None)
-    redis.set("datetimelaststackdeploy", None)
+    if (redis.exists("counter") < 1):
+        redis.set("counter", 0)
+        redis.set("laststackdeploy", None)
+        redis.set("datetimelaststackdeploy", None)
 except RedisError:
     temp = None
 
