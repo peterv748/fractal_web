@@ -27,20 +27,17 @@ google_maps_url = "https://www.google.com/maps/embed/v1/place?q=Aalsmeer,Netherl
 
 app = Flask(__name__)
 temp = None
-redis = Redis(host="127.0.0.1", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
 
 try:
-    if REDIS_HOST == "127.0.0.1":
-       redis = Redis(host="127.0.0.1", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
-    else:
-        if REDIS_HOST == "redis":
-           redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
+    redis = Redis(host=REDIS_HOST, db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
     if (redis.exists("counter") < 1):
         redis.set("counter", 0)
         redis.set("laststackdeploy", None)
         redis.set("datetimelaststackdeploy", None)
+    RedisErrorIsTrue = False
 except RedisError:
     temp = None
+    RedisErrorIsTrue = True
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/" and "home" page
@@ -48,11 +45,12 @@ except RedisError:
 @app.route('/')
 @app.route('/home')
 def show_home():
-    try:
-        visits = redis.incr("counter")
-    except RedisError:
+    
+    if RedisErrorIsTrue:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
-  
+    else:
+        visits = redis.incr("counter")
+
     Kelvin = 273.15
     main_forecast = {}
     main_description = ""
