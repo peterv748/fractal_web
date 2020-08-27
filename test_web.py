@@ -39,6 +39,21 @@ except RedisError:
     temp = None
     RedisErrorIsTrue = True
 
+def updateVisits(IsRedisError):
+
+    tempValue = ""
+    if IsRedisError:
+        tempValue = "<i>cannot connect to Redis, counter disabled</i>"
+    else:
+        tempValue = redis.get("counter")
+        if tempValue == None:
+            tempValue = 1
+        else:
+            tempValue = tempValue + 1
+        redis.set("counter", tempValue)
+
+    return tempValue
+
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/" and "home" page
 #---------------------------------------------------------------------------------------------------------------------
@@ -46,10 +61,7 @@ except RedisError:
 @app.route('/home')
 def show_home():
     
-    if RedisErrorIsTrue:
-        visits = "<i>cannot connect to Redis, counter disabled</i>"
-    else:
-        visits = redis.incrby("counter", amount=1)
+    visits = updateVisits(RedisErrorIsTrue)
 
     Kelvin = 273.15
     main_forecast = {}
@@ -83,10 +95,8 @@ def show_home():
 
 @app.route('/fractals')
 def show_fractal_index():
-    if RedisErrorIsTrue:
-        visits = "<i>cannot connect to Redis, counter disabled</i>"
-    else:
-        visits = redis.incrby("counter", amount=1)
+    
+    visits = updateVisits(RedisErrorIsTrue)
 
     return render_template("fractal_index.html", hostname=socket.gethostname(), visits=visits)
 
@@ -96,11 +106,8 @@ def show_fractal_index():
 
 @app.route('/<string:imagename>')
 def show_fractal_picture(imagename):
-    if RedisErrorIsTrue:
-        visits = "<i>cannot connect to Redis, counter disabled</i>"
-    else:
-        visits = redis.incrby("counter", amount=1)
-
+    
+    visits = updateVisits(RedisErrorIsTrue)
 
     image_path = " "
     image_path = imagename + ".png"
@@ -114,11 +121,8 @@ def show_fractal_picture(imagename):
 
 @app.route('/news')
 def show_news():
-    if RedisErrorIsTrue:
-        visits = "<i>cannot connect to Redis, counter disabled</i>"
-    else:
-        visits = redis.incrby("counter", amount=1)
-
+    
+    visits = updateVisits(RedisErrorIsTrue)
     
     temp = {}
     number_of_headlines = 0
@@ -174,11 +178,8 @@ def show_news():
 
 @app.route('/about')
 def show_about():
-    if RedisErrorIsTrue:
-        visits = "<i>cannot connect to Redis, counter disabled</i>"
-    else:
-        visits = redis.incrby("counter", amount=1)
-
+    
+    visits = updateVisits(RedisErrorIsTrue)
 
     return render_template("about.html", hostname=socket.gethostname(), visits=visits)
 
@@ -188,11 +189,8 @@ def show_about():
 
 @app.route('/contact')
 def show_contact():
-    if RedisErrorIsTrue:
-        visits = "<i>cannot connect to Redis, counter disabled</i>"
-    else:
-        visits = redis.incrby("counter", amount=1)
-
+    
+    visits = updateVisits(RedisErrorIsTrue)
 
     return render_template("contact.html", hostname=socket.gethostname(), visits=visits)
 
@@ -209,8 +207,9 @@ def show_web_hook():
     date_time_str = ""
     date_time_now_str=""
     
+    visits = updateVisits(RedisErrorIsTrue)
     if not RedisErrorIsTrue:
-        visits = redis.incrby("counter", amount=1)
+        
         if request.method=='POST':
            date_time= datetime.now()
            date_time_str = f'{date_time:%d-%m-%Y %H:%M:%S}'
@@ -225,7 +224,7 @@ def show_web_hook():
            message_post = redis.get("laststackdeploy")
            date_time_str = redis.get("datetimelaststackdeploy")
     else:
-        visits = "<i>cannot connect to Redis, counter disabled</i>"  
+         
         if request.method=='POST':
            date_time= datetime.now()
            date_time_str = f'{date_time:%d-%m-%Y %H:%M:%S}'
@@ -243,10 +242,8 @@ def show_web_hook():
 
 @app.route('/link2')
 def show_link2():
-    if RedisErrorIsTrue:
-        visits = "<i>cannot connect to Redis, counter disabled</i>"
-    else:
-        visits = redis.incrby("counter", amount=1)
+    
+    visits = updateVisits(RedisErrorIsTrue)
 
 
     return render_template("link2.html", hostname=socket.gethostname(), visits=visits)
@@ -257,11 +254,8 @@ def show_link2():
 
 @app.route('/link3')
 def show_link3():
-    if RedisErrorIsTrue:
-        visits = "<i>cannot connect to Redis, counter disabled</i>"
-    else:
-        visits = redis.incrby("counter", amount=1)
-
+    
+    visits = updateVisits(RedisErrorIsTrue)
 
     return render_template("link3.html", hostname=socket.gethostname(), visits=visits)
 
