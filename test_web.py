@@ -49,7 +49,7 @@ def show_home():
     if RedisErrorIsTrue:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     else:
-        visits = redis.incr("counter", amount=1)
+        visits = redis.incrby("counter", amount=1)
 
     Kelvin = 273.15
     main_forecast = {}
@@ -86,7 +86,7 @@ def show_fractal_index():
     if RedisErrorIsTrue:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     else:
-        visits = redis.incr("counter", amount=1)
+        visits = redis.incrby("counter", amount=1)
 
     return render_template("fractal_index.html", hostname=socket.gethostname(), visits=visits)
 
@@ -99,7 +99,7 @@ def show_fractal_picture(imagename):
     if RedisErrorIsTrue:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     else:
-        visits = redis.incr("counter", amount=1)
+        visits = redis.incrby("counter", amount=1)
 
 
     image_path = " "
@@ -117,7 +117,7 @@ def show_news():
     if RedisErrorIsTrue:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     else:
-        visits = redis.incr("counter", amount=1)
+        visits = redis.incrby("counter", amount=1)
 
     
     temp = {}
@@ -177,7 +177,7 @@ def show_about():
     if RedisErrorIsTrue:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     else:
-        visits = redis.incr("counter", amount=1)
+        visits = redis.incrby("counter", amount=1)
 
 
     return render_template("about.html", hostname=socket.gethostname(), visits=visits)
@@ -191,7 +191,7 @@ def show_contact():
     if RedisErrorIsTrue:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     else:
-        visits = redis.incr("counter", amount=1)
+        visits = redis.incrby("counter", amount=1)
 
 
     return render_template("contact.html", hostname=socket.gethostname(), visits=visits)
@@ -210,7 +210,7 @@ def show_web_hook():
     date_time_now_str=""
     
     if not RedisErrorIsTrue:
-        visits = redis.incr("counter", amount=1)
+        visits = redis.incrby("counter", amount=1)
         if request.method=='POST':
            date_time= datetime.now()
            date_time_str = f'{date_time:%d-%m-%Y %H:%M:%S}'
@@ -246,7 +246,7 @@ def show_link2():
     if RedisErrorIsTrue:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     else:
-        visits = redis.incr("counter", amount=1)
+        visits = redis.incrby("counter", amount=1)
 
 
     return render_template("link2.html", hostname=socket.gethostname(), visits=visits)
@@ -260,7 +260,7 @@ def show_link3():
     if RedisErrorIsTrue:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
     else:
-        visits = redis.incr("counter", amount=1)
+        visits = redis.incrby("counter", amount=1)
 
 
     return render_template("link3.html", hostname=socket.gethostname(), visits=visits)
