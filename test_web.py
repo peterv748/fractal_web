@@ -45,12 +45,8 @@ def updateVisits(IsRedisError):
     if IsRedisError:
         ReturnString = "<i>cannot connect to Redis, counter disabled</i>"
     else:
+        redis.incrby("counter", amount=1)
         tempValue = redis.get("counter")
-        if tempValue == None:
-            tempValue = 1
-        else:
-            tempValue = tempValue + 1
-        redis.set("counter", tempValue)
         ReturnString = str(tempValue)
     return ReturnString
 
