@@ -41,9 +41,9 @@ except RedisError:
 
 def updateVisits(IsRedisError):
 
-    tempValue = ""
+    ReturnString = ""
     if IsRedisError:
-        tempValue = "<i>cannot connect to Redis, counter disabled</i>"
+        ReturnString = "<i>cannot connect to Redis, counter disabled</i>"
     else:
         tempValue = redis.get("counter")
         if tempValue == None:
@@ -51,8 +51,8 @@ def updateVisits(IsRedisError):
         else:
             tempValue = tempValue + 1
         redis.set("counter", tempValue)
-
-    return tempValue
+        ReturnString = str(tempValue)
+    return ReturnString
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/" and "home" page
