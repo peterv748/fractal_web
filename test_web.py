@@ -47,7 +47,7 @@ def updateVisits(IsRedisError):
     else:
         redis.incrby("counter", amount=1)
         tempValue = redis.get("counter")
-        ReturnString = str(tempValue)
+        ReturnString = str(tempValue, "utf-8")
     return ReturnString
 
 #---------------------------------------------------------------------------------------------------------------------
