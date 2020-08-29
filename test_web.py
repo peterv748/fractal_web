@@ -198,8 +198,8 @@ def show_contact():
 def show_web_hook():
     message_post = None
     message_get = None
-    date_time = None
-    date_time_now = None
+    # date_time = None
+    # date_time_now = None
     date_time_str = ""
     date_time_now_str=""
     
