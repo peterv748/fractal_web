@@ -18,7 +18,7 @@ Weather_Api_Key = os.environ["OMW_API_KEY"]
 IP_Api_Key = os.environ["IPDATA_API_KEY"]
 Google_Api_Key = os.environ["GOOGLE_MAPS_API_KEY"]
 REDIS_HOST = os.environ["REDIS_HOST"]
-date_today = date.today().isoformat()
+DateToday = date.today().isoformat()
 news_headlines_url = "https://newsapi.org/v2/top-headlines?sources=rtl-nieuws&apiKey={}".format(News_Api_Key)
 news_topic_url = "https://newsapi.org/v2/everything?q=mathematics&from=" + date_today +"&apiKey={}".format(News_Api_Key)
 weather_url = "https://api.openweathermap.org/data/2.5/weather?q=Aalsmeer,nl&appid={}".format(Weather_Api_Key)
@@ -207,28 +207,28 @@ def show_web_hook():
     if not RedisErrorIsTrue:
         
         if request.method=='POST':
-           date_time= datetime.now()
-           date_time_str = f'{date_time:%d-%m-%Y %H:%M:%S}'
+           # date_time= datetime.now()
+           date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
            message_post= "update: docker stack deploy -c docker-compose.yml fractal has been executed"
            redis.set("laststackdeploy", message_post)
            redis.set("datetimelaststackdeploy", date_time_str)
                 
         if request.method=='GET':
            message_get= "no updates sofar"
-           date_time_now = datetime.now() 
-           date_time_now_str = f'{date_time_now:%d-%m-%Y %H:%M:%S}'
+           # date_time_now = datetime.now() 
+           date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
            message_post = redis.get("laststackdeploy")
            date_time_str = redis.get("datetimelaststackdeploy")
     else:
          
         if request.method=='POST':
-           date_time= datetime.now()
+           # date_time= datetime.now()
            date_time_str = f'{date_time:%d-%m-%Y %H:%M:%S}'
            message_post= "last redeploy: docker stack deploy -c docker-compose.yml fractal has been executed"
         else:
            message_get= "no updates sofar"
-           date_time_now= datetime.now()   
-           date_time_now_str = f'{date_time_now:%d-%m-%Y %H:%M:%S}'
+           # date_time_now= datetime.now()   
+           date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
 
     return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=message_post, message_get=message_get, date_time=date_time_str, date_time_now=date_time_now_str)
 
