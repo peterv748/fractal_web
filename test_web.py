@@ -207,6 +207,8 @@ def show_web_hook():
         if request.method=='POST':
            date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
            message_post= "docker stack deploy -c docker-compose.yml fractal has been executed"
+           message_get = message_post
+           date_time_now_str = date_time_str
            redis.set("laststackdeploy", message_post)
            redis.set("datetimelaststackdeploy", date_time_str)
                 
@@ -219,12 +221,16 @@ def show_web_hook():
          
         if request.method=='POST':
            date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
-           message_post= "last redeploy: docker stack deploy -c docker-compose.yml fractal has been executed"
+           message_post= "Cannot read from database"
+           message_get= "no updates sofar"   
+           date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
         else:
            message_get= "no updates sofar"   
            date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
+           date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
+           message_post= "Cannot read from database"
 
-    return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=message_post, message_get=message_get, date_time=date_time_str, date_time_now=date_time_now_str)
+    return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=str(message_post, "utf-8"), message_get=(message_get, "utf-8"), date_time=date_time_str, date_time_now=date_time_now_str)
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/link2" page, second submenu page
