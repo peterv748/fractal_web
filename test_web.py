@@ -208,7 +208,7 @@ def show_web_hook():
         
         if request.method=='POST':
            # date_time= datetime.now()
-           date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
+           date_time_str = DateToday #f'{DateToday:%d-%m-%Y %H:%M:%S}'
            message_post= "update: docker stack deploy -c docker-compose.yml fractal has been executed"
            redis.set("laststackdeploy", message_post)
            redis.set("datetimelaststackdeploy", date_time_str)
@@ -216,19 +216,19 @@ def show_web_hook():
         if request.method=='GET':
            message_get= "no updates sofar"
            # date_time_now = datetime.now() 
-           date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
+           date_time_now_str = DateToday #f'{DateToday:%d-%m-%Y %H:%M:%S}'
            message_post = redis.get("laststackdeploy")
            date_time_str = redis.get("datetimelaststackdeploy")
     else:
          
         if request.method=='POST':
            # date_time= datetime.now()
-           date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
+           date_time_str = DateToday #f'{DateToday:%d-%m-%Y %H:%M:%S}'
            message_post= "last redeploy: docker stack deploy -c docker-compose.yml fractal has been executed"
         else:
            message_get= "no updates sofar"
            # date_time_now= datetime.now()   
-           date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
+           date_time_now_str = DateToday #f'{DateToday:%d-%m-%Y %H:%M:%S}'
 
     return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=message_post, message_get=message_get, date_time=date_time_str, date_time_now=date_time_now_str)
 
