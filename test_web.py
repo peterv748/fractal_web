@@ -216,7 +216,9 @@ def show_web_hook():
            message_get= "no updates sofar" 
            date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
            message_post = redis.get("laststackdeploy")
+           message_post = str(message_post, "utf-8")
            date_time_str = redis.get("datetimelaststackdeploy")
+           date_time_str = str(date_time_str, "utf-8")
     else:
          
         if request.method=='POST':
@@ -230,7 +232,7 @@ def show_web_hook():
            date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
            message_post= "Cannot read from database"
 
-    return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=str(message_post, "utf-8"), message_get=str(message_get, "utf-8"), date_time=date_time_str, date_time_now=date_time_now_str)
+    return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=message_post, message_get=message_get, date_time=date_time_str, date_time_now=date_time_now_str)
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/link2" page, second submenu page
