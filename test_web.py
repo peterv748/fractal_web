@@ -223,7 +223,7 @@ def show_web_hook():
          
         if request.method=='POST':
            # date_time= datetime.now()
-           date_time_str = f'{date_time:%d-%m-%Y %H:%M:%S}'
+           date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
            message_post= "last redeploy: docker stack deploy -c docker-compose.yml fractal has been executed"
         else:
            message_get= "no updates sofar"
