@@ -20,7 +20,7 @@ Google_Api_Key = os.environ["GOOGLE_MAPS_API_KEY"]
 REDIS_HOST = os.environ["REDIS_HOST"]
 DateToday = date.today().isoformat()
 news_headlines_url = "https://newsapi.org/v2/top-headlines?sources=rtl-nieuws&apiKey={}".format(News_Api_Key)
-news_topic_url = "https://newsapi.org/v2/everything?q=mathematics&from=" + date_today +"&apiKey={}".format(News_Api_Key)
+news_topic_url = "https://newsapi.org/v2/everything?q=mathematics&from=" + DateToday +"&apiKey={}".format(News_Api_Key)
 weather_url = "https://api.openweathermap.org/data/2.5/weather?q=Aalsmeer,nl&appid={}".format(Weather_Api_Key)
 streetview_url = "https://www.google.com/maps/embed/v1/streetview?location=52.2621639,4.7619222&heading=180&key={}".format(Google_Api_Key)
 google_maps_url = "https://www.google.com/maps/embed/v1/place?q=Aalsmeer,Netherlands&key={}".format(Google_Api_Key)
