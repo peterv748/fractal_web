@@ -44,6 +44,7 @@ def updateVisits(IsRedisError):
         ReturnString = "<i>cannot connect to Redis, counter disabled</i>"
     else:
         redis.incrby("counter")
+        redis.set("laststackdeploy", f'{datetime.today(): %H:%M:%S:$f}')
         tempValue = redis.get("counter")
         ReturnString = str(tempValue, "utf-8")
     return ReturnString
