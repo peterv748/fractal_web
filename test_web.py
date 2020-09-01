@@ -26,7 +26,6 @@ streetview_url = "https://www.google.com/maps/embed/v1/streetview?location=52.26
 google_maps_url = "https://www.google.com/maps/embed/v1/place?q=Aalsmeer,Netherlands&key={}".format(Google_Api_Key)
 
 app = Flask(__name__)
-temp = None
 
 try:
     redis = Redis(host=REDIS_HOST, db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
@@ -36,7 +35,6 @@ try:
         redis.set("datetimelaststackdeploy", f'{DateToday:%d-%m-%Y %H:%M:%S}')
     RedisErrorIsTrue = False
 except RedisError:
-    temp = None
     RedisErrorIsTrue = True
 
 def updateVisits(IsRedisError):
@@ -205,7 +203,7 @@ def show_web_hook():
     if not RedisErrorIsTrue:
         
         if request.method=='POST':
-           date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
+           date_time_str = f'{datetime.today():%d-%m-%Y %H:%M:%S}'
            message_post= "docker stack deploy -c docker-compose.yml fractal has been executed"
            message_get = message_post
            date_time_now_str = date_time_str
@@ -214,7 +212,7 @@ def show_web_hook():
                 
         if request.method=='GET':
            message_get= "no updates sofar" 
-           date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
+           date_time_now_str = f'{datetime.today():%d-%m-%Y %H:%M:%S}'
            message_post = redis.get("laststackdeploy")
            message_post = str(message_post, "utf-8")
            date_time_str = redis.get("datetimelaststackdeploy")
@@ -222,13 +220,13 @@ def show_web_hook():
     else:
          
         if request.method=='POST':
-           date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
+           date_time_str = f'{datetime.today():%d-%m-%Y %H:%M:%S}'
            message_post= "Cannot read from database"
            message_get= "no updates sofar"   
            date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
         else:
            message_get= "no updates sofar"   
-           date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
+           date_time_now_str = f'{datetime.today():%d-%m-%Y %H:%M:%S}'
            date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
            message_post= "Cannot read from database"
 
