@@ -9,4 +9,5 @@ COPY ./templates/index.html /data/www/
 RUN ls /data/www/
 EXPOSE 3500
 EXPOSE 9000
+EXPOSE 9080
 CMD ["nginx", "-g", "daemon off;"]
