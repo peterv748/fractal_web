@@ -31,7 +31,7 @@ try:
     redis = Redis(host=REDIS_HOST, db=0, socket_connect_timeout=2, socket_timeout=2, port=6379)
     if (redis.exists("counter") < 1):
         redis.set("counter", 0)
-        redis.set("laststackdeploy", "No updates done sofar")
+        redis.set("lastvisit", "")
         redis.set("datetimelaststackdeploy", f'{DateToday:%d-%m-%Y %H:%M:%S}')
     RedisErrorIsTrue = False
 except RedisError:
@@ -44,7 +44,7 @@ def updateVisits(IsRedisError):
         ReturnString = "<i>cannot connect to Redis, counter disabled</i>"
     else:
         redis.incrby("counter")
-        redis.set("laststackdeploy", f'{datetime.today(): %H:%M:%S:%f}')
+        redis.set("lastvisit", f'{datetime.today(): %H:%M:%S:%f}')
         tempValue = redis.get("counter")
         ReturnString = str(tempValue, "utf-8")
     return ReturnString
@@ -207,16 +207,13 @@ def show_web_hook():
            date_time_str = f'{datetime.today():%d-%m-%Y %H:%M:%S:%f}'
            message_post= "docker stack deploy -c docker-compose.yml fractal has been executed"
            date_time_now_str = date_time_str
-           redis.set("laststackdeploy", message_post)
            redis.set("datetimelaststackdeploy", date_time_str)
-           message_get = redis.get("laststackdeploy")
-           message_get = str(message_get,"utf-8")
+           
                 
         if request.method=='GET':
            message_get= "no updates sofar" 
            date_time_now_str = f'{datetime.today():%d-%m-%Y %H:%M:%S:%f}'
-           message_post = redis.get("laststackdeploy")
-           message_post = str(message_post, "utf-8")
+           message_post = "last update executed "
            date_time_str = redis.get("datetimelaststackdeploy")
            date_time_str = str(date_time_str, "utf-8")
     else:
@@ -225,7 +222,7 @@ def show_web_hook():
            date_time_str = f'{datetime.today():%d-%m-%Y %H:%M:%S:%f}'
            message_post= "Cannot read from database"
            message_get= "no updates sofar"   
-           date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S:%f}'
+           date_time_now_str = f'{datetime.today():%d-%m-%Y %H:%M:%S:%f}'
         else:
            message_get= "no updates sofar"   
            date_time_now_str = f'{datetime.today():%d-%m-%Y %H:%M:%S:%f}'
