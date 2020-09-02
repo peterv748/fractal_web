@@ -56,7 +56,7 @@ def updateVisits(IsRedisError):
 @app.route('/home')
 def show_home():
     
-    visits = updateVisits(RedisErrorIsTrue)
+    number_visits = updateVisits(RedisErrorIsTrue)
 
     Kelvin = 273.15
     main_forecast = {}
@@ -82,7 +82,7 @@ def show_home():
     else:
       print ("sorry something went wrong, no connection " + url_data.text)
 
-    return render_template("home.html", hostname=socket.gethostname(), visits=visits, google_maps_url=google_maps_url, streetview_url=streetview_url, message = message)
+    return render_template("home.html", hostname=socket.gethostname(), visits=number_visits, google_maps_url=google_maps_url, streetview_url=streetview_url, message = message)
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/fractals index page
@@ -91,9 +91,9 @@ def show_home():
 @app.route('/fractals')
 def show_fractal_index():
     
-    visits = updateVisits(RedisErrorIsTrue)
+    number_visits = updateVisits(RedisErrorIsTrue)
 
-    return render_template("fractal_index.html", hostname=socket.gethostname(), visits=visits)
+    return render_template("fractal_index.html", hostname=socket.gethostname(), visits=number_visits)
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/images page, where the fractal images are displayed
@@ -102,13 +102,13 @@ def show_fractal_index():
 @app.route('/<string:imagename>')
 def show_fractal_picture(imagename):
     
-    visits = updateVisits(RedisErrorIsTrue)
+    number_visits = updateVisits(RedisErrorIsTrue)
 
     image_path = " "
     image_path = imagename + ".png"
     full_filename = url_for('static', filename=image_path)
 
-    return render_template("fractals.html", user_image = full_filename, hostname=socket.gethostname(), visits=visits)
+    return render_template("fractals.html", user_image = full_filename, hostname=socket.gethostname(), visits=number_visits)
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/news" page
@@ -117,7 +117,7 @@ def show_fractal_picture(imagename):
 @app.route('/news')
 def show_news():
     
-    visits = updateVisits(RedisErrorIsTrue)
+    number_visits = updateVisits(RedisErrorIsTrue)
     
     temp = {}
     number_of_headlines = 0
@@ -165,7 +165,7 @@ def show_news():
       line2 = "sorry something went wrong " + url_data.text
     
     
-    return render_template("news_index.html", hostname=socket.gethostname(), visits=visits, params_headlines=output_list_headlines, params_maths=output_list_math_headlines) 
+    return render_template("news_index.html", hostname=socket.gethostname(), visits=number_visits, params_headlines=output_list_headlines, params_maths=output_list_math_headlines) 
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/about" page
@@ -174,9 +174,9 @@ def show_news():
 @app.route('/about')
 def show_about():
     
-    visits = updateVisits(RedisErrorIsTrue)
+    number_visits = updateVisits(RedisErrorIsTrue)
 
-    return render_template("about.html", hostname=socket.gethostname(), visits=visits)
+    return render_template("about.html", hostname=socket.gethostname(), visits=number_visits)
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/contact"  page
@@ -185,9 +185,9 @@ def show_about():
 @app.route('/contact')
 def show_contact():
     
-    visits = updateVisits(RedisErrorIsTrue)
+    number_visits = updateVisits(RedisErrorIsTrue)
 
-    return render_template("contact.html", hostname=socket.gethostname(), visits=visits)
+    return render_template("contact.html", hostname=socket.gethostname(), visits=number_visits)
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/webhook" page, first submenu page
@@ -200,16 +200,17 @@ def show_web_hook():
     date_time_str = ""
     date_time_now_str=""
     
-    visits = updateVisits(RedisErrorIsTrue)
+    number_visits = updateVisits(RedisErrorIsTrue)
     if not RedisErrorIsTrue:
         
         if request.method=='POST':
            date_time_str = f'{datetime.today():%d-%m-%Y %H:%M:%S}'
            message_post= "docker stack deploy -c docker-compose.yml fractal has been executed"
-           message_get = message_post
            date_time_now_str = date_time_str
            redis.set("laststackdeploy", message_post)
            redis.set("datetimelaststackdeploy", date_time_str)
+           message_get = redis.get("laststackdeploy")
+           message_get = str(message_get,"utf-8")
                 
         if request.method=='GET':
            message_get= "no updates sofar" 
@@ -231,7 +232,7 @@ def show_web_hook():
            date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
            message_post= "Cannot read from database"
 
-    return render_template("web_hook.html", hostname=socket.gethostname(), visits=visits, message_post=message_post, message_get=message_get, date_time=date_time_str, date_time_now=date_time_now_str)
+    return render_template("web_hook.html", hostname=socket.gethostname(), visits=number_visits, message_post=message_post, message_get=message_get, date_time=date_time_str, date_time_now=date_time_now_str)
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/link2" page, second submenu page
@@ -240,10 +241,10 @@ def show_web_hook():
 @app.route('/link2')
 def show_link2():
     
-    visits = updateVisits(RedisErrorIsTrue)
+    number_visits = updateVisits(RedisErrorIsTrue)
 
 
-    return render_template("link2.html", hostname=socket.gethostname(), visits=visits)
+    return render_template("link2.html", hostname=socket.gethostname(), visits=number_visits)
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/link3" page, third submenu page
@@ -252,9 +253,9 @@ def show_link2():
 @app.route('/link3')
 def show_link3():
     
-    visits = updateVisits(RedisErrorIsTrue)
+    number_visits = updateVisits(RedisErrorIsTrue)
 
-    return render_template("link3.html", hostname=socket.gethostname(), visits=visits)
+    return render_template("link3.html", hostname=socket.gethostname(), visits=number_visits)
 
 
 
