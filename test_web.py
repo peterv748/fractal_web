@@ -32,6 +32,7 @@ try:
     if (redis.exists("counter") < 1):
         redis.set("counter", 0)
         redis.set("lastvisit", "")
+        redis.set("host", socket.gethostname())
         redis.set("datetimelaststackdeploy", f'{DateToday:%d-%m-%Y %H:%M:%S}')
     RedisErrorIsTrue = False
 except RedisError:
@@ -45,6 +46,7 @@ def updateVisits(IsRedisError):
     else:
         redis.incrby("counter")
         redis.set("lastvisit", f'{datetime.today(): %H:%M:%S:%f}')
+        redis.set("host", socket.gethostname())
         tempValue = redis.get("counter")
         ReturnString = str(tempValue, "utf-8")
     return ReturnString
