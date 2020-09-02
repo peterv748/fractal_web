@@ -204,7 +204,7 @@ def show_web_hook():
     if not RedisErrorIsTrue:
         
         if request.method=='POST':
-           date_time_str = f'{datetime.today():%d-%m-%Y %H:%M:%S}'
+           date_time_str = f'{datetime.today():%d-%m-%Y %H:%M:%S:%f}'
            message_post= "docker stack deploy -c docker-compose.yml fractal has been executed"
            date_time_now_str = date_time_str
            redis.set("laststackdeploy", message_post)
@@ -214,7 +214,7 @@ def show_web_hook():
                 
         if request.method=='GET':
            message_get= "no updates sofar" 
-           date_time_now_str = f'{datetime.today():%d-%m-%Y %H:%M:%S}'
+           date_time_now_str = f'{datetime.today():%d-%m-%Y %H:%M:%S:%f}'
            message_post = redis.get("laststackdeploy")
            message_post = str(message_post, "utf-8")
            date_time_str = redis.get("datetimelaststackdeploy")
@@ -222,14 +222,14 @@ def show_web_hook():
     else:
          
         if request.method=='POST':
-           date_time_str = f'{datetime.today():%d-%m-%Y %H:%M:%S}'
+           date_time_str = f'{datetime.today():%d-%m-%Y %H:%M:%S:%f}'
            message_post= "Cannot read from database"
            message_get= "no updates sofar"   
-           date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
+           date_time_now_str = f'{DateToday:%d-%m-%Y %H:%M:%S:%f}'
         else:
            message_get= "no updates sofar"   
-           date_time_now_str = f'{datetime.today():%d-%m-%Y %H:%M:%S}'
-           date_time_str = f'{DateToday:%d-%m-%Y %H:%M:%S}'
+           date_time_now_str = f'{datetime.today():%d-%m-%Y %H:%M:%S:%f}'
+           date_time_str = f'{datetime.today():%d-%m-%Y %H:%M:%S:%f}'
            message_post= "Cannot read from database"
 
     return render_template("web_hook.html", hostname=socket.gethostname(), visits=number_visits, message_post=message_post, message_get=message_get, date_time=date_time_str, date_time_now=date_time_now_str)
