@@ -58,6 +58,7 @@ def updateVisits(IsRedisError):
 @app.route('/home')
 def show_home():
     
+    print("home entry")
     number_visits = updateVisits(RedisErrorIsTrue)
 
     Kelvin = 273.15
@@ -92,7 +93,7 @@ def show_home():
 
 @app.route('/fractals')
 def show_fractal_index():
-    
+    print("fractals entry")
     number_visits = updateVisits(RedisErrorIsTrue)
 
     return render_template("fractal_index.html", hostname=socket.gethostname(), visits=number_visits)
@@ -103,7 +104,7 @@ def show_fractal_index():
 
 @app.route('/<string:imagename>')
 def show_fractal_picture(imagename):
-    
+    print("fractal image entry")
     number_visits = updateVisits(RedisErrorIsTrue)
 
     image_path = " "
@@ -118,7 +119,7 @@ def show_fractal_picture(imagename):
 
 @app.route('/news')
 def show_news():
-    
+    print("news entry")
     number_visits = updateVisits(RedisErrorIsTrue)
     
     temp = {}
@@ -175,7 +176,7 @@ def show_news():
 
 @app.route('/about')
 def show_about():
-    
+    print("about entry")
     number_visits = updateVisits(RedisErrorIsTrue)
 
     return render_template("about.html", hostname=socket.gethostname(), visits=number_visits)
@@ -186,7 +187,7 @@ def show_about():
 
 @app.route('/contact')
 def show_contact():
-    
+    print("show contact entry")
     number_visits = updateVisits(RedisErrorIsTrue)
 
     return render_template("contact.html", hostname=socket.gethostname(), visits=number_visits)
@@ -201,7 +202,7 @@ def show_web_hook():
     message_get = ""
     date_time_str = ""
     date_time_now_str=""
-    
+    print("webhook entry")
     number_visits = updateVisits(RedisErrorIsTrue)
     if not RedisErrorIsTrue:
         
@@ -239,7 +240,7 @@ def show_web_hook():
 
 @app.route('/link2')
 def show_link2():
-    
+    print("link2 entry")
     number_visits = updateVisits(RedisErrorIsTrue)
 
 
@@ -251,7 +252,7 @@ def show_link2():
 
 @app.route('/link3')
 def show_link3():
-    
+    print("link3 entry")
     number_visits = updateVisits(RedisErrorIsTrue)
 
     return render_template("link3.html", hostname=socket.gethostname(), visits=number_visits)
