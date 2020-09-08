@@ -1,12 +1,12 @@
 FROM nginx:latest
 
-# RUN rm /etc/nginx/conf.d/default.conf
-# VOLUME /var/log/nginx/error_log.log/
-# VOLUME /var/log/nginx
+
 COPY ./nginx.conf /etc/nginx/
-# COPY ./nginx.conf /etc/conf.d/default.conf
 COPY ./templates/index.html /data/www/
-RUN ls /data/www/
+COPY ./templates/css/*.* /data/www/css/
+COPY ./templates/img/*.* /data/www/img/
+# RUN ls ./templates/css
+
 EXPOSE 3500
 EXPOSE 9000
 EXPOSE 9080
