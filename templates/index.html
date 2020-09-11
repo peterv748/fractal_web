@@ -4,33 +4,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Some Page Title</title>
+        <title>Fractal picture of the day</title>
         
 
         <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" />
         
         <link rel="stylesheet" href="./css/style-responsive-main.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    
+        <link rel="shortcut icon" href="#" />
         <style>
-            /* make the cells output their value */
-               td[Connectivity]:after {
-                 content: attr(Connectivity);
-               }
-           
-               /* make connection-status down  in red */
-               td[Connectivity^="Down"]:after {
-                 background-color: red;
-                 content: ' \2639';
-               }
-           
-               /* make connection-status Up  in green */
-               td[Connectivity^="Up"]:after {
-                 background-color: green;
-                 content: ' \263A';
-               }
-           
-            </style> 
+            
+        </style> 
 	</head>
 
 	<body>
@@ -55,7 +39,7 @@
             </ul>
           
                     
-            <h1>IPC Endpoint Overview</h1>
+            <h1>Fractals everywhere</h1>
             <p>A Proof of Concept</p>           
             
             
@@ -68,119 +52,10 @@
             </h2>    
             <article class="img-item">
                 <figure>  
-                    <table>
-   <caption><h2>ansible_prod</h2></caption>
-<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
-<td>https://ansible.infra.ing.net</td><td Connectivity="Up"></td><td>294</td><td>06-05-2020 16:23:53</td></tr>
-</table>
+                    {% block content %}{% endblock %}
                 </figure>
             </article>
-            <article class="img-item">
-                <figure>  
-                    <table>
-   <caption><h2>artifactory</h2></caption>
-<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
-<td>https://artifactory.ing.net</td><td Connectivity="Up"></td><td>323</td><td>06-05-2020 16:23:53</td></tr>
-</table>
-                </figure>
-            </article>
-            <article class="img-item">
-                <figure>  
-                    big_fi
-                </figure>
-            </article>   
-            <article class="img-item">
-                <figure>  
-                    <table>
-   <caption><h2>gitlab_ing</h2></caption>
-<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
-<td>https://gitlab.ing.net</td><td Connectivity="Up"></td><td>391</td><td>06-05-2020 16:23:52</td></tr>
-</table>
-                </figure>
-            </article>
-            <article class="img-item">
-                <figure>  
-                    <table>
-   <caption><h2>ipam</h2></caption>
-<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
-<td>https://www.ipam.intranet/</td><td Connectivity="Up"></td><td>410</td><td>06-05-2020 16:23:55</td></tr>
-</table>
-                </figure>
-            </article>
-            <article class="img-item">
-                <figure>  
-                    <table>
-   <caption><h2>portal</h2></caption>
-<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
-<td>https://cloud.ing.net/</td><td Connectivity="Down"></td><td>301</td><td>06-05-2020 16:23:41</td></tr>
-</table>
-                </figure>
-            </article>
-            <article class="img-item">
-                <figure>  
-                    <table>
-   <caption><h2>snow</h2></caption>
-<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
-<td>https://ing.service-now.com</td><td Connectivity="Up"></td><td>267</td><td>06-05-2020 16:23:51</td></tr>
-</table>
-                </figure>
-            </article>
-            <article class="img-item">
-                <figure>  
-                    <table>
-   <caption><h2>vrbe</h2></caption>
-<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
-<td>https://clrv0000013419.ic.ing.net:8443/</td><td Connectivity="Up"></td><td>303</td><td>06-05-2020 16:23:51</td></tr>
-</table>
-                </figure>
-            </article>
-            <article class="img-item">
-                <figure>  
-                    <table>
-   <caption><h2>sollar</h2></caption>
-<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
-<td>https://sollar.iam.ing.net</td><td Connectivity="Down"></td><td>704</td><td>06-05-2020 16:23:55</td></tr>
-</table>
-                </figure>
-            </article>
-            <article class="img-item">
-                <figure>  
-                    <table>
-   <caption><h2>pwv</h2></caption>
-<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
-<td>https://pwv.europe.intranet/PasswordVault/WebServices/</td><td Connectivity="Down"></td><td>224</td><td>06-05-2020 16:23:54</td></tr>
-</table>
-                </figure>
-            </article>
-            <article class="img-item">
-                <figure>
-                    <table>
-   <caption><h2>tenant_names</h2></caption>
-<tr><th>Uri</th><th>Connectivity</th><th>RoundtripTime</th><th>TimeOfDay</th></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/infranl/</td><td Connectivity="Up"></td><td>120</td><td>06-05-2020 16:23:44</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/bankinfra/</td><td Connectivity="Up"></td><td>164</td><td>06-05-2020 16:23:42</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/wbs/</td><td Connectivity="Up"></td><td>120</td><td>06-05-2020 16:23:42</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/dbnl/</td><td Connectivity="Up"></td><td>139</td><td>06-05-2020 16:23:43</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/ingcng/</td><td Connectivity="Up"></td><td>127</td><td>06-05-2020 16:23:50</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/tchpl/</td><td Connectivity="Up"></td><td>173</td><td>06-05-2020 16:23:50</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/inglu/</td><td Connectivity="Up"></td><td>177</td><td>06-05-2020 16:23:49</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/gs/</td><td Connectivity="Up"></td><td>129</td><td>06-05-2020 16:23:43</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/ipcch/</td><td Connectivity="Up"></td><td>175</td><td>06-05-2020 16:23:49</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/ingfr/</td><td Connectivity="Up"></td><td>211</td><td>06-05-2020 16:23:48</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/ingcz/</td><td Connectivity="Up"></td><td>220</td><td>06-05-2020 16:23:47</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/ingde/</td><td Connectivity="Up"></td><td>174</td><td>06-05-2020 16:23:47</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/inges/</td><td Connectivity="Up"></td><td>167</td><td>06-05-2020 16:23:46</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/ingit/</td><td Connectivity="Up"></td><td>167</td><td>06-05-2020 16:23:46</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/isro/</td><td Connectivity="Up"></td><td>333</td><td>06-05-2020 16:23:45</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/ingro/</td><td Connectivity="Up"></td><td>134</td><td>06-05-2020 16:23:45</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/ingbe/</td><td Connectivity="Up"></td><td>122</td><td>06-05-2020 16:23:44</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/ingpl/</td><td Connectivity="Up"></td><td>170</td><td>06-05-2020 16:23:48</td></tr>
-<td>https://ipcloud.ic.ing.net/vcac/org/ingau/</td><td Connectivity="Up"></td><td>171</td><td>06-05-2020 16:23:48</td></tr>
-</table>
-                </figure>
-            </article>
-            <br class="clear"/>
-        </section>
+            
         
         <section id="text_columns">
         	<h2 class="hidden">Blindtext</h2>
