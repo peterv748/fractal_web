@@ -2,12 +2,10 @@
 FROM python:3.7
 
 # Set the working directory to /app
-WORKDIR /test_web_app
+WORKDIR /test_web_app/
 
 # Copy the current directory contents into the container at /app
-COPY . /test_web_app
-COPY ./templates/css/*.* /test_web_app/css/
-COPY ./templates/img/*.* /test_web_app/img/
+COPY . /test_web_app/
 COPY ./templates/css/*.* /test_web_app/templates/css/
 COPY ./templates/img/*.* /test_web_app/templates/img/
 
