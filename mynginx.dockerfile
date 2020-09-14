@@ -3,8 +3,8 @@ FROM nginx:latest
 
 COPY ./nginx.conf /etc/nginx/
 COPY ./templates/index.html /data/www/
-COPY ./templates/css/*.* /data/www/templates/css/
-COPY ./templates/img/*.* /data/www/templates/img/
+COPY ./static/css/*.* /data/www/static/css/
+COPY ./static/img/*.* /data/www/static/img/
 # RUN ls ./templates/css
 
 EXPOSE 3500
