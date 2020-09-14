@@ -3,7 +3,7 @@ FROM nginx:latest
 
 COPY ./nginx.conf /etc/nginx/
 COPY ./templates/index.html /data/www/
-COPY ./static/css/*.* /data/www/static/css/
+COPY ./static/styles/css/*.* /data/www/static/styles/css/
 COPY ./static/img/*.* /data/www/static/img/
 # RUN ls ./templates/css
 

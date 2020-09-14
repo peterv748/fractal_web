@@ -6,8 +6,8 @@ WORKDIR /test_web_app/
 
 # Copy the current directory contents into the container at /app
 COPY . /test_web_app/
-COPY ./templates/css/*.* /test_web_app/static/css/
-COPY ./templates/img/*.* /test_web_app/static/img/
+COPY ./static/styles/css/*.* /test_web_app/static/styles/css/
+COPY ./static/img/*.* /test_web_app/static/img/
 
 RUN python -m pip install --upgrade pip
 # Install any needed packages specified in requirements.txt
