@@ -1,18 +1,12 @@
     
-      h2 {color: rgb(255,158,0);}
+h2 {color: rgb(255,158,0);}
 /*      h4 {text-transform: uppercase;}*/
 
-      * {
-          box-sizing: border-box
-        }
-/*      
-      body { 
-        font-family: Arial, Helvetica, sans-serif; 
-        background: white;
-        color: rgb(255,158,0);
-      }
-*/ 
-      .wrapper {
+* {
+    box-sizing: border-box
+  }
+
+.wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     grid-gap: 10px;
@@ -35,7 +29,7 @@
    height: 100%;
 }
    
-      .container {
+.container {
         background-size: cover;
         max-width: 100%;
         max-height: 100%;
@@ -44,53 +38,56 @@
         text-align: center;
 	      box-sizing : border-box;
         
-      }
+}
       
       
-      div.container {
+div.container {
         max-width: 100%;
 	      max-height: 100%;
         margin: auto;
         padding: 2px;
 	      box-sizing: border-box;
         text-align: center;
-      }
+}
       
-      ul {
+ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
         overflow: hidden;
         background-color: rgb(255,158,0);
         font-size: 20px;
-      }
-      li {
-        float: left;
-      }
+}
 
-      li a, .dropbtn {
+li {
+        float: left;
+}
+
+li a, .dropbtn {
             display: inline-block;
             color: white;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
-           }
+}
      
-      li a:hover, .dropdown:hover .dropbtn {
+li a:hover, .dropdown:hover .dropbtn {
             background-color: grey
-          }
+}
     
-      li.dropdown {
-            display: inline-block
-          }
+
 /* The container <div> - needed to position the dropdown content */
-    .dropdown {
+.dropdown {
                float: right;
                display: block;
                overflow: hidden;
-               }
+}
+
+li.dropdown {
+  display: inline-block
+}
 /* Style The Dropdown Button */
-    .dropdown .dropbtn {
+.dropdown .dropbtn {
               font-size: 20px;
               font-family: Arial;
               background-color: rgb(255, 158, 0);
@@ -99,10 +96,10 @@
               padding: 14px 16px;
               text-decoration: none;
               text-align: center;
-             }
+}
     
 /* Dropdown Content (Hidden by Default) */
-        .dropdown-content {
+.dropdown-content {
             display: none;
             position: absolute;
             background-color: grey;
@@ -112,20 +109,21 @@
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1;
             text-decoration: none
-            }
+}
 /* Links inside the dropdown */
-        .dropdown-content a {
+.dropdown-content a {
             color: white;
             padding: 4px 4px;
             text-decoration: none;
             display: block;
             text-align: center;
-            }
+}
 /* Change color of dropdown links on hover */
-   .dropdown-content a:hover {background-color: white;
+.dropdown-content a:hover {background-color: white;
                               color:black;
-			                 }
-   .dropdown:hover .dropdown-content {display:block;}
+}
+
+.dropdown:hover .dropdown-content {display:block;}
 
 
 
