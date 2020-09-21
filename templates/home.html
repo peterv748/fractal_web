@@ -22,10 +22,12 @@
         })();
     </script>
 <h3 align="center">{{message}}</h3>
- 
-    <img src={{google_maps_url}}>     
     
-    <img src={{streetview_url}}>
+    <section>
+        <iframe style="height:200px;width:300px; border: 0" img src={{google_maps_url}}> </iframe>   
+    
+        <iframe style="height:200px;width:300px; border: 0" img src={{streetview_url}}> </iframe>
+    </section>
     
 
 {% endblock %}
