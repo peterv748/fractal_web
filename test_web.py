@@ -58,34 +58,12 @@ def updateVisits(IsRedisError):
 @app.route('/home')
 def show_home():
     
-    print("home entry")
+
     number_visits = updateVisits(RedisErrorIsTrue)
 
-    Kelvin = 273.15
-    main_forecast = {}
-    main_description = ""
-    main_temp = {}
-    temp = ""
-    city = ""
-    message = ""
-    url_data = req.get(weather_url)
-
-    json_data_dict = dict(url_data.json())
-    if url_data.status_code == 200:
     
-       if json_data_dict['cod'] == 200:
-          main_forecast = dict(json_data_dict['weather'][0] )
-          main_description = main_forecast['description']
-          city = json_data_dict['name']
-          main_temp = dict(json_data_dict['main'])
-          temp = str(int(main_temp['temp']- Kelvin)) + " ℃"
-          message = "Current weather in " + city + " " + main_description + " " + temp
-       else:
-         print ("no data received")
-    else:
-      print ("sorry something went wrong, no connection " + url_data.text)
 
-    return render_template("home.html", hostname=socket.gethostname(), visits=number_visits, google_maps_url=google_maps_url, streetview_url=streetview_url, message = message)
+    return render_template("home.html", hostname=socket.gethostname(), visits=number_visits)
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/fractals index page
@@ -187,10 +165,32 @@ def show_about():
 
 @app.route('/contact')
 def show_contact():
-    print("show contact entry")
+   
     number_visits = updateVisits(RedisErrorIsTrue)
+    Kelvin = 273.15
+    main_forecast = {}
+    main_description = ""
+    main_temp = {}
+    temp = ""
+    city = ""
+    message = ""
+    url_data = req.get(weather_url)
 
-    return render_template("contact.html", hostname=socket.gethostname(), visits=number_visits)
+    json_data_dict = dict(url_data.json())
+    if url_data.status_code == 200:
+    
+       if json_data_dict['cod'] == 200:
+          main_forecast = dict(json_data_dict['weather'][0] )
+          main_description = main_forecast['description']
+          city = json_data_dict['name']
+          main_temp = dict(json_data_dict['main'])
+          temp = str(int(main_temp['temp']- Kelvin)) + " ℃"
+          message = "Current weather in " + city + " " + main_description + " " + temp
+       else:
+         print ("no data received")
+    else:
+      print ("sorry something went wrong, no connection " + url_data.text)
+    return render_template("contact.html", hostname=socket.gethostname(), visits=number_visits, google_maps_url=google_maps_url, streetview_url=streetview_url, message = message)
 
 #---------------------------------------------------------------------------------------------------------------------
 # handler for the "/webhook" page, first submenu page
