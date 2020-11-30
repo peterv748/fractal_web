@@ -227,9 +227,6 @@ def get_parser():
     return parser
 
 
-
-
-
 def main(addr, port):
 
     """Start a HTTPServer which waits for requests."""
@@ -237,7 +234,6 @@ def main(addr, port):
     httpd = HTTPServer((addr, port), RequestHandler)
 
     httpd.serve_forever()
-
 
 
 if __name__ == '__main__':
